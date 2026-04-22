@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-skills",
+  "description": "Curated Claude skill packs for structured product and engineering work.",
+  "owner": {
+    "name": "Stanislav Nianko",
+    "email": "promoinua@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "discovery-phase",
+      "description": "12-phase product discovery pack: orchestrator drives a team from a rough idea through problem framing, research, synthesis, scope, and an optional tech PoC to a GO/PIVOT/KILL memo.",
+      "author": {
+        "name": "Stanislav Nianko",
+        "email": "promoinua@gmail.com"
+      },
+      "source": "./plugins/discovery-phase",
+      "category": "product",
+      "homepage": "https://github.com/stanislavnianko/claude-skills"
+    }
+  ]
+}

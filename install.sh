@@ -4,7 +4,7 @@
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SOURCE_DIR="$REPO_DIR/skills"
+SOURCE_DIR="$REPO_DIR/plugins/discovery-phase/skills"
 
 TARGET_DIR="$HOME/.claude/skills"
 TRACK="all"              # all | core

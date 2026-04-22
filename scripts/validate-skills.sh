@@ -4,7 +4,7 @@
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SKILLS_DIR="$REPO_DIR/skills"
+SKILLS_DIR="$REPO_DIR/plugins/discovery-phase/skills"
 
 failures=0
 warnings=0

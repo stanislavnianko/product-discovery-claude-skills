@@ -68,31 +68,31 @@ See [`skills/orchestrator/README.md`](skills/orchestrator/README.md) for the ful
 ## Repository layout
 
 ```
-ClaudeSkills/
-├── .claude-plugin/plugin.json    Plugin manifest (name=discovery-phase)
-├── README.md                     (this file)
-├── LICENSE                       MIT
-├── install.sh                    Fallback filesystem installer
+claude-skills/                          (marketplace repo)
+├── .claude-plugin/
+│   └── marketplace.json                Lists available plugins
+├── README.md                            (this file)
+├── LICENSE                              MIT
+├── install.sh                           Fallback filesystem installer
 ├── scripts/
-│   └── validate-skills.sh        Lints every SKILL.md's frontmatter
-└── skills/
-    ├── orchestrator/             Master skill — entry point
-    │   ├── SKILL.md
-    │   ├── README.md
-    │   ├── assets/flow.md
-    │   └── templates/            Shared artifact templates (8 files)
-    ├── problem-framing/
-    ├── stakeholder-alignment/
-    ├── user-research-planning/
-    ├── user-interviews/
-    ├── market-competitive-scan/
-    ├── insight-synthesis/
-    ├── opportunity-solution-tree/
-    ├── risk-assumption-mapping/
-    ├── scope-mvp-definition/
-    ├── tech-feasibility-spike/   (tech-poc track)
-    ├── poc-prototype-plan/       (tech-poc track)
-    └── go-nogo-decision/
+│   └── validate-skills.sh               Lints every SKILL.md's frontmatter
+└── plugins/
+    └── discovery-phase/                 The plugin
+        ├── .claude-plugin/plugin.json   Plugin manifest
+        └── skills/
+            ├── orchestrator/            Master skill — entry point
+            ├── problem-framing/
+            ├── stakeholder-alignment/
+            ├── user-research-planning/
+            ├── user-interviews/
+            ├── market-competitive-scan/
+            ├── insight-synthesis/
+            ├── opportunity-solution-tree/
+            ├── risk-assumption-mapping/
+            ├── scope-mvp-definition/
+            ├── tech-feasibility-spike/  (tech-poc track)
+            ├── poc-prototype-plan/      (tech-poc track)
+            └── go-nogo-decision/
 ```
 
 Each skill folder contains `SKILL.md` (frontmatter + workflow), `template.md` (fill-in artifact), and `examples/`.
