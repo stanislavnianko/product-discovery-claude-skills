@@ -1,0 +1,8 @@
+{
+  "name": "discovery-phase",
+  "description": "Discovery → PoC skill pack. Orchestrates 12 phase sub-skills to drive a team from a rough idea to a validated prototype or go/no-go decision. Tech-PoC track is skippable when feasibility is already known.",
+  "author": {
+    "name": "Stanislav Nianko",
+    "email": "promoinua@gmail.com"
+  }
+}
