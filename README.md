@@ -13,8 +13,6 @@ profile-builder  ──writes──▶  discovery-context.md
               every other skill reads it; halts if missing
 ```
 
-Inspired by [charlie947/social-media-skills](https://github.com/charlie947/social-media-skills) — same pattern: foundation skill establishes context once, all downstream skills consume it.
-
 ## Skill groups
 
 | Group | Skills | What they do |
