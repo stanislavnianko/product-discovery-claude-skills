@@ -1,73 +1,80 @@
 ---
 name: problem-framing
 description: >-
-  Phase 1 of the discovery-phase pack. Turns a rough idea into a framed
-  problem, target user, success signal, and testable hypothesis. Produces
-  a problem-canvas.md. Activate when starting a discovery cycle or when
-  stuck because the team is pitching solutions to an undefined problem.
-track: core
-phase: 1
+  Discovery group skill. Restates the client's problem, target user,
+  current workaround, success signal, and renders a falsifiable hypothesis.
+  Pressure-tests against falsifiability, specificity, novelty, and
+  strategic alignment. Produces problem-canvas.md. Reads
+  discovery-context.md.
+group: discovery
 produces: problem-canvas.md
-consumes: none
+consumes: discovery-context.md
 origin: ECC
 ---
 
-# Phase 1 — Problem Framing
+# Problem Framing
 
-Turns "I have an idea" into a testable hypothesis and a set of research questions. Sets the north star for the rest of the cycle.
+Turns whatever the client said into a testable, falsifiable hypothesis. If the client already proposed a solution (very common in outsourcing), this skill **un-pitches** it back into a problem statement before anything downstream runs.
 
-## When to activate
+## Step 1 — Read discovery context
 
-- Start of any discovery cycle (called by the `orchestrator` skill).
-- Team is debating solutions but can't agree — almost always a symptom of an unframed problem.
-- User asks "what should we build?" — the right answer is usually "let's frame the problem first."
+Read `discovery-context.md` from project root.
 
-## Inputs
+**If missing:** Stop and tell the user:
+> "I need a discovery context to work with. Run `profile-builder` first (say `build my discovery profile`), then come back. Halting now."
 
-- Rough problem statement (one or two sentences from the user).
-- Optional: related context (existing feature areas, prior research, strategic priorities).
+**If present:** Pull sections **1. Client**, **2. Product / Initiative**. If section 2 says the client already proposed a solution, flag it — this skill will need to extract the underlying problem from that solution rather than starting clean.
 
-## Procedure
+## Step 2 — Forbid solution-speak (mid-skill rule)
 
-### Step 1 — Forbid solutions
-Open the session by stating the rule: **no solution words in this phase**. Catch and reframe when the user slips into solution-speak ("we should add a button…"). Redirect: "What outcome would the button produce? Why do they not get that outcome today?"
+Apply this rule throughout: any phrasing like "build X", "add Y feature", "implement Z" is intercepted and reframed as "what outcome would X produce, and why is that outcome missing today?"
 
-### Step 2 — Fill the canvas
-Walk the user through the canvas template (see `./template.md` or the shared `templates/problem-canvas.md` in orchestrator). Sections to complete:
+This applies even to the client's own framing. If the discovery-context says they want "an AI assistant", the canvas asks: "What job is the AI assistant supposed to do, and what's broken about how that job gets done today?"
 
-1. **Problem statement** — who / in what context / what outcome
-2. **Why now** — what changed that makes this worth doing
-3. **Target user** — role, segment, buyer vs end-user
-4. **Current workaround** — how this is solved today
-5. **Success signal** — metric + direction + rough magnitude
+## Step 3 — Fill the canvas
+
+Walk the BA through the canvas. Each section is 1-3 sentences max.
+
+1. **Problem statement** — who has the problem, in what context, what outcome they're not getting
+2. **Why now** — what changed in the world / market / client's business that makes this worth solving this quarter
+3. **Target user** — role, segment, size; if B2B, name the buyer AND the end user if different (often same in SMB, different in enterprise)
+4. **Current workaround** — how the user solves this today (Excel, manual ops, a competitor, contractors, doing nothing)
+5. **Success signal** — metric + direction + rough magnitude (NOT a feature; a behavior or outcome)
 6. **Out of scope** — explicit exclusions
-7. **Open questions** — 3–5 items research must answer
+7. **Open questions** — 3-5 items research must answer
 
-### Step 3 — Write the hypothesis
-Render the canvas into a single sentence of the form:
+If the BA cannot answer a section because the engagement is too early or the client hasn't been asked, mark "TBD — ask client" and add to a per-skill follow-up list at the bottom of the canvas. Do not invent.
+
+## Step 4 — Render hypothesis
+
+One sentence:
 > We believe that `<user>` experiences `<problem>` when `<context>`. Solving it would unlock `<outcome>`, measurable by `<signal>`.
 
-### Step 4 — Pressure test
-Apply these 4 checks. If any fails, loop back to the weak section:
-- **Falsifiability:** what evidence would make us drop this hypothesis?
-- **Specificity:** can we name a real person who has this problem?
-- **Novelty:** does the current workaround already solve 80% of it? If yes, is the remaining 20% worth a project?
-- **Alignment:** does "why now" match the company's current priorities? If no, surface this to the user before continuing.
+## Step 5 — Pressure test (4 checks)
 
-## Output
+Run these. If any fails, loop back to the linked section.
 
-Write `./discovery/problem-canvas.md` using the shared template. Append a 3-line exit summary to `DISCOVERY.md`.
+| Test | Question | Fix in section |
+|---|---|---|
+| **Falsifiability** | What concrete observation would make us drop this hypothesis? | Success signal + Open questions |
+| **Specificity** | Can we name a real living person who has this problem right now? | Target user |
+| **Novelty** | Does the current workaround already do 80%? Is the remaining 20% worth a project? | Current workaround |
+| **Strategic alignment** | Does "why now" match the **client's** current priorities (not the agency's)? | Why now (and surface to stakeholder-mapping) |
 
-## Handoff
+If 3+ tests fail, tell the BA: "This hypothesis isn't ready. Three of four pressure tests failed. Loop back, ideally with another 30-minute conversation with the client."
 
-Next phase: `stakeholder-alignment` (phase 2). Feed the filled canvas forward.
+## Step 6 — Write artifact
+
+Output: `./discovery/problem-canvas.md` — see `./template.md`.
+
+Append a 3-line exit summary to a running `./discovery/_log.md` file (create if missing):
+```
+[problem-framing | <date>] hypothesis: <one-line>; pressure tests: <4/4 pass | flags>
+```
 
 ## Anti-patterns
 
-- **"I already know the problem."** Ask them to write the hypothesis sentence. If they can't in 90 seconds, the problem is not framed.
-- **Multi-problem canvas.** If the user crams 3 problems into one canvas, split into 3 canvases and pick one for this cycle.
-- **Solution smuggled into success signal.** "Success = button click rate" is a solution metric. Push up one level: what is the button supposed to cause?
-
-## Shared template
-
-`orchestrator/templates/problem-canvas.md` — same content as this skill's local `template.md`; either is authoritative.
+- **Accepting client's solution as the problem.** "Client wants an AI chatbot" is not a problem statement. Force the un-pitch.
+- **Multi-problem canvas.** If the BA cram 3 problems into one canvas, split into 3, pick one for this cycle.
+- **TBD in success signal.** Without a measurable signal, every downstream phase is guesswork. Push the BA to call the client if necessary.
+- **Skipping pressure test for a friendly client.** Especially dangerous in repeat engagements — comfort breeds vague hypotheses.

@@ -34,9 +34,9 @@ check_skill() {
     fi
   done
 
-  # Phase skills (not orchestrator) should also declare track, phase, produces
-  if [[ "$name" != "orchestrator" ]]; then
-    for key in track phase produces; do
+  # Non-foundation/conductor skills should declare group + produces
+  if [[ "$name" != "profile-builder" && "$name" != "discovery-conductor" ]]; then
+    for key in group produces; do
       if ! grep -qE "^${key}:" <<<"$fm"; then
         echo "WARN  $name: missing recommended key '$key'"; ((warnings++)) || true
       fi

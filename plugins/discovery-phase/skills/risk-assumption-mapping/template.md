@@ -1,25 +1,32 @@
 # Risk & Assumption Map
 
-> Phase 8 artifact. See `orchestrator/templates/risk-assumption-map.md` for the full shared template.
-
 ## Assumptions by axis
+
 ### Desirability
-### Viability
+- 
+
+### Viability (client business)
+- 
+
 ### Feasibility
+- 
+
 ### Usability
+- 
+
 ### Ethical / legal
 
 ## Scoring
 
-| # | Assumption | Impact (1–5) | Evidence (1–5) | Leverage | Retire-by test |
-|---|---|---|---|---|---|
+| # | Assumption | Owner | Impact | Evidence | Leverage | Test method | Retire-by | Kill signal |
+|---|---|---|---|---|---|---|---|---|
 
-## Top 3 to retire
+## Top 3 to retire (pre-committed kill criteria)
 1. 
 2. 
 3. 
 
-## Kill criteria (pre-committed)
-- 
-- 
-- 
+## Risk register for deliverables
+
+| Risk | Owner | Mitigation if not retired in discovery |
+|---|---|---|

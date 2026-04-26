@@ -1,101 +1,176 @@
-# ClaudeSkills
+# product-discovery-claude-skills
 
-A curated pack of Claude skills for structured product work. Primary targets: Claude (claude.ai) and Claude Cowork; also compatible with Claude Code.
+A Claude skill pack for structured product discovery — designed for **outsourcing engagements** (BA / agency / consultant working on a client's product), but works equally well for internal product teams.
 
-## First pack: `discovery-phase`
+22 skills, organized into 7 groups, runnable independently in any sequence. One foundation skill writes a reusable context file that every other skill reads.
 
-Drives a team from a rough idea through 12 discovery phases to either a validated prototype/PoC or a documented GO/PIVOT/KILL memo. The tech-PoC track (phases 10–11) is skippable when feasibility is already known.
+## Concept
 
-### The 12 phases
+```
+profile-builder  ──writes──▶  discovery-context.md
+                                   │
+                                   ▼
+              every other skill reads it; halts if missing
+```
 
-| # | Skill | Track | Produces |
-|---|---|---|---|
-| 0 | `orchestrator` | — | Drives the full cycle, writes `DISCOVERY.md` index |
-| 1 | `problem-framing` | core | `problem-canvas.md` |
-| 2 | `stakeholder-alignment` | core | `stakeholder-map.md` |
-| 3 | `user-research-planning` | core | `research-plan.md`, `interview-guide.md` |
-| 4 | `user-interviews` | core | `interview-notes/*.md` |
-| 5 | `market-competitive-scan` | core | `competitive-scan.md` |
-| 6 | `insight-synthesis` | core | `insight-matrix.md`, `themes.md` |
-| 7 | `opportunity-solution-tree` | core | `opportunity-tree.md` |
-| 8 | `risk-assumption-mapping` | core | `risk-assumption-map.md` |
-| 9 | `scope-mvp-definition` | core | `scope-doc.md` |
-| 10 | `tech-feasibility-spike` | tech-poc | `tech-spike-report.md` |
-| 11 | `poc-prototype-plan` | tech-poc | `poc-plan.md` + runnable skeleton |
-| 12 | `go-nogo-decision` | core | `go-no-go-memo.md` |
+Inspired by [charlie947/social-media-skills](https://github.com/charlie947/social-media-skills) — same pattern: foundation skill establishes context once, all downstream skills consume it.
 
-Flow diagram: [`skills/orchestrator/assets/flow.md`](skills/orchestrator/assets/flow.md).
+## Skill groups
+
+| Group | Skills | What they do |
+|---|---|---|
+| **Foundation** | `profile-builder`, `discovery-conductor` | Build the context file. Optional conductor guides sequence. |
+| **Discovery** | `problem-framing`, `stakeholder-mapping`, `research-planning` | Frame the problem, surface stakeholders, plan how to learn. |
+| **Evidence** | `user-interviews`, `sme-workshops`, `competitive-scan`, `secondary-research`, `support-data-analysis` | Gather evidence — pick what your access actually permits. |
+| **Synthesis** | `insight-synthesis`, `opportunity-mapping`, `risk-assumption-mapping` | Turn raw evidence into ranked themes, opportunities, and risks. |
+| **Scoping** | `feature-scoping`, `mvp-definition`, `estimation` | Define what to build, what's MVP vs PoC, and how much it costs. |
+| **Validation** | `feasibility-spike`, `prototype-plan` | Retire tech / product assumptions before build. |
+| **Deliverables** | `proposal`, `sow-draft`, `discovery-handoff`, `go-nogo-memo` | Commercial + decisional outputs for the client and the receiving team. |
+
+Full skill list with one-liners: see [`docs/skills.md`](#) (TODO) or run `./scripts/validate-skills.sh` to enumerate.
+
+## Why outsourcing-first?
+
+Most product-discovery resources assume an internal team with direct user access. Real outsourcing engagements look different:
+
+- The client owns the problem; you extract it from a brief
+- End users may be unreachable — replace interviews with SME workshops, support-data analysis, secondary research
+- Decision-owner is the client, not the agency
+- Output is usually a proposal / SoW / handoff, not a GO/PIVOT/KILL memo
+- Risks split into client-owned, agency-owned, shared
+
+This pack defaults to that reality. For internal product use, the same skills apply unchanged — the foundation captures "we're internal" in the context file, and every skill adapts.
 
 ## Install
 
-### Option A — Claude plugin marketplace (recommended)
-
-Inside Claude Cowork or Claude Code:
+### Plugin marketplace (recommended for Claude Cowork / Code)
 
 ```
-/plugin marketplace add https://github.com/<your-user>/ClaudeSkills
+/plugin marketplace add https://github.com/stanislavnianko/product-discovery-claude-skills
 /plugin install discovery-phase
 ```
 
-Skills then appear namespaced as `discovery-phase:orchestrator`, `discovery-phase:problem-framing`, etc. Updates land via `/plugin update`.
+Skills appear namespaced as `discovery-phase:profile-builder`, `discovery-phase:problem-framing`, etc.
 
-### Option B — Upload to claude.ai Projects
-
-Each skill folder under `skills/` can be uploaded as-is to a Claude Project's Skills settings. The `orchestrator` skill should always be uploaded first; it references the others by name.
-
-### Option C — `install.sh` fallback (Codex CLI / CI / plain filesystem)
+### Filesystem install (Codex CLI / CI / fallback)
 
 ```bash
-git clone https://github.com/<your-user>/ClaudeSkills.git
-cd ClaudeSkills
-./install.sh                      # full pack → ~/.claude/skills/
-./install.sh core                 # core track only (skips tech-poc phases)
-./install.sh --project ~/myproj   # project scope: ~/myproj/.claude/skills/
-./install.sh --link               # symlink instead of copy (dev mode)
-./install.sh --dry-run            # preview without touching the filesystem
+git clone https://github.com/stanislavnianko/product-discovery-claude-skills.git
+cd product-discovery-claude-skills
+./install.sh                            # all 22 skills → ~/.claude/skills/
+./install.sh --group foundation         # just foundation skills
+./install.sh --group discovery          # just discovery group
+./install.sh --project ~/myclient       # install into project scope
+./install.sh --link --force             # dev mode: symlink, overwrite
+./install.sh --dry-run                  # preview without writing
 ```
+
+### claude.ai Projects
+
+Upload individual skill folders via Settings → Skills. Always upload `profile-builder` first; it's the foundation every other skill depends on.
 
 ## Using the pack
 
-Once installed, start any session with:
+**1. Build context first.**
 
-> Use the `orchestrator` skill to plan a discovery cycle for `<problem one-liner>`.
+```
+Use the profile-builder skill.
+```
 
-The skill asks three intake questions (problem, users, PoC needed?), writes a plan, creates `./discovery/DISCOVERY.md`, and walks you through phases one at a time with gates between them.
+It interviews you about the client, the engagement, the access, and the deliverable. Writes `discovery-context.md` to your current project root. That's the one file every other skill needs.
 
-See [`skills/orchestrator/README.md`](skills/orchestrator/README.md) for the full usage guide.
+**2. Run skills à la carte, or use the conductor.**
+
+À la carte:
+```
+Use the problem-framing skill.
+Use the stakeholder-mapping skill.
+Use the user-interviews skill.
+... etc
+```
+
+Guided:
+```
+Use the discovery-conductor skill.
+```
+
+The conductor reads your context, picks a sequence based on engagement type and access level, and walks you through it — but you can override any step.
+
+**3. Each skill produces an artifact in `./discovery/`.**
+
+Discovery cycle output looks like:
+
+```
+./
+├── discovery-context.md         (from profile-builder, foundation)
+└── discovery/
+    ├── _log.md                  (running log of skill runs)
+    ├── problem-canvas.md
+    ├── stakeholder-map.md
+    ├── research-plan.md
+    ├── interview-guide.md
+    ├── interview-notes/
+    ├── sme-notes/
+    ├── competitive-scan.md
+    ├── secondary-research.md
+    ├── support-data-analysis.md
+    ├── insight-matrix.md
+    ├── themes.md
+    ├── opportunity-tree.md
+    ├── risk-assumption-map.md
+    ├── scope-doc.md
+    ├── mvp-definition.md
+    ├── estimation.md
+    ├── tech-spike-report.md
+    ├── poc-plan.md
+    ├── poc/                     (runnable skeleton if applicable)
+    ├── proposal.md
+    ├── sow-draft.md
+    ├── discovery-handoff.md
+    └── go-no-go-memo.md
+```
+
+Most engagements run a subset — typical pre-sale produces ~10 files; a full paid discovery sprint produces ~18.
 
 ## Repository layout
 
 ```
-claude-skills/                          (marketplace repo)
-├── .claude-plugin/
-│   └── marketplace.json                Lists available plugins
-├── README.md                            (this file)
-├── LICENSE                              MIT
-├── install.sh                           Fallback filesystem installer
+product-discovery-claude-skills/
+├── .claude-plugin/marketplace.json   Marketplace manifest (lists 1 plugin)
+├── README.md                         (this file)
+├── LICENSE                           MIT
+├── install.sh                        Fallback filesystem installer
 ├── scripts/
-│   └── validate-skills.sh               Lints every SKILL.md's frontmatter
+│   └── validate-skills.sh            Lints SKILL.md frontmatter
 └── plugins/
-    └── discovery-phase/                 The plugin
-        ├── .claude-plugin/plugin.json   Plugin manifest
-        └── skills/
-            ├── orchestrator/            Master skill — entry point
+    └── discovery-phase/              The plugin
+        ├── .claude-plugin/plugin.json
+        └── skills/                   22 skills, one folder each
+            ├── profile-builder/
+            ├── discovery-conductor/
             ├── problem-framing/
-            ├── stakeholder-alignment/
-            ├── user-research-planning/
+            ├── stakeholder-mapping/
+            ├── research-planning/
             ├── user-interviews/
-            ├── market-competitive-scan/
+            ├── sme-workshops/
+            ├── competitive-scan/
+            ├── secondary-research/
+            ├── support-data-analysis/
             ├── insight-synthesis/
-            ├── opportunity-solution-tree/
+            ├── opportunity-mapping/
             ├── risk-assumption-mapping/
-            ├── scope-mvp-definition/
-            ├── tech-feasibility-spike/  (tech-poc track)
-            ├── poc-prototype-plan/      (tech-poc track)
-            └── go-nogo-decision/
+            ├── feature-scoping/
+            ├── mvp-definition/
+            ├── estimation/
+            ├── feasibility-spike/
+            ├── prototype-plan/
+            ├── proposal/
+            ├── sow-draft/
+            ├── discovery-handoff/
+            └── go-nogo-memo/
 ```
 
-Each skill folder contains `SKILL.md` (frontmatter + workflow), `template.md` (fill-in artifact), and `examples/`.
+Each skill folder has `SKILL.md` (frontmatter + procedure) and `template.md` (artifact template).
 
 ## Validating
 
@@ -103,21 +178,20 @@ Each skill folder contains `SKILL.md` (frontmatter + workflow), `template.md` (f
 ./scripts/validate-skills.sh
 ```
 
-Checks every `SKILL.md` has valid frontmatter with required keys. Exits non-zero on failures.
+Confirms every SKILL.md has valid frontmatter with `name` + `description`, plus group/produces for non-foundation skills.
 
-## Contributing / extending
+## Versioning
 
-Patterns to follow when adding a phase or a new pack:
+**v1.0.0** — first stable release. 22 skills, foundation pattern, group-based, outsourcing-first framing.
 
-- Each skill lives in `skills/<skill-name>/` with its own `SKILL.md`.
-- Frontmatter must include `name`, `description`. Phase skills also include `track`, `phase`, `produces`, `consumes`.
-- Keep `description` under 500 characters — Claude Code truncates beyond that.
-- Shared artifact templates live in `skills/orchestrator/templates/`. Phase-local templates cross-reference them.
-- Reference existing skills by name (e.g., `blueprint`, `deep-research`) rather than duplicating functionality.
+Pre-1.0 history (12-phase orchestrator pattern) was wiped on the v1.0 release. If you need it, check the `v0.1.0` git tag.
 
 ## Credits
 
-Structure inspired by [deanpeters/Product-Manager-Skills](https://github.com/deanpeters/Product-Manager-Skills). Opportunity-solution-tree methodology follows Teresa Torres. Assumption-mapping axes follow the desirability/viability/feasibility frame.
+- Pattern from [charlie947/social-media-skills](https://github.com/charlie947/social-media-skills) — voice-builder → downstream-skills foundation model
+- Initial structure inspired by [deanpeters/Product-Manager-Skills](https://github.com/deanpeters/Product-Manager-Skills)
+- Opportunity-solution-tree methodology: Teresa Torres
+- Desirability/Viability/Feasibility framing: IDEO
 
 ## License
 

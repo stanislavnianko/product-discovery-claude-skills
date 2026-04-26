@@ -9,14 +9,37 @@
   "plugins": [
     {
       "name": "discovery-phase",
-      "description": "12-phase product discovery pack: orchestrator drives a team from a rough idea through problem framing, research, synthesis, scope, and an optional tech PoC to a GO/PIVOT/KILL memo.",
+      "description": "22 skills for running structured product discovery in outsourcing or internal contexts. Foundation skill builds reusable client/engagement context; group-based skills (Discovery, Evidence, Synthesis, Scoping, Validation, Deliverables) run independently in any sequence. Optional conductor for guided sequences.",
+      "version": "1.0.0",
       "author": {
         "name": "Stanislav Nianko",
         "email": "promoinua@gmail.com"
       },
       "source": "./plugins/discovery-phase",
       "category": "product",
-      "homepage": "https://github.com/stanislavnianko/claude-skills"
+      "homepage": "https://github.com/stanislavnianko/product-discovery-claude-skills",
+      "metadata": {
+        "categories": [
+          "foundation",
+          "discovery",
+          "evidence",
+          "synthesis",
+          "scoping",
+          "validation",
+          "deliverables"
+        ],
+        "tags": [
+          "product discovery",
+          "business analysis",
+          "outsourcing",
+          "ba",
+          "proposal",
+          "estimation",
+          "user interviews",
+          "competitive analysis",
+          "scoping"
+        ]
+      }
     }
   ]
 }

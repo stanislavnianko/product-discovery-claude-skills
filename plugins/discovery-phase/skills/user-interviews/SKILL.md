@@ -1,84 +1,56 @@
 ---
 name: user-interviews
 description: >-
-  Phase 4 of the discovery-phase pack. Runs customer interviews to
-  saturation using the guide from phase 3. Produces structured interview
-  notes, one file per participant. Consumes interview-guide.md. Optimised
-  for learning past behavior, not validating solutions.
-track: core
-phase: 4
-produces: interview-notes/*.md
-consumes: interview-guide.md
+  Evidence group skill. Runs direct end-user interviews to saturation.
+  Gates on access — halts if discovery-context says user_access is none
+  or proxy-only. Captures past behavior, not hypotheticals. Produces one
+  note file per participant + saturation log.
+group: evidence
+produces: interview-notes/p<NN>-*.md, _saturation-log.md
+consumes: discovery-context.md, interview-guide.md (if exists)
 origin: ECC
 ---
 
-# Phase 4 — User Interviews
+# User Interviews
 
-Execute the interviews planned in phase 3. Capture what users *did*, not what they *think they'll do*. Stop at saturation.
+Direct user interviews. Run only when `user_access` allows it.
 
-## When to activate
+## Step 1 — Read discovery context
 
-- After phase 3 (research plan + guide) is signed off.
-- Once per interview session (the skill helps prep, run, and capture).
-- When the user says "I just did some user calls, help me write them up" — still invokable for the capture portion.
+Read `discovery-context.md`. Halt if missing (run `profile-builder`).
 
-## Inputs
+Pull section **4. Access & Data**.
 
-- `interview-guide.md` from phase 3.
-- Participant scheduling info (name/initials, role, date).
-- Optional: transcript / recording / live notes.
+**Access gate:**
+- `direct` or `client-mediated` → proceed
+- `proxy-only` → tell user: "discovery-context says no end-user access. Use `sme-workshops`, `support-data-analysis`, or `secondary-research` instead. Halting."
+- `none` → same as above
 
-## Procedure per interview
+If guide exists at `./discovery/interview-guide.md`, use it. If not, recommend running `research-planning` first to build one.
 
-### Before (15 min)
-1. Open the guide alongside a blank note doc.
-2. Skim the participant's profile — LinkedIn, past emails, any prior notes.
-3. Confirm one objective for *this specific* interview (which of the research questions lands heaviest with this person?).
+## Step 2 — Per-interview prep (15 min)
 
-### During (45–60 min)
-Follow the guide, but optimize for these behaviors:
-- **Listen past the polite answer.** First answer is usually rehearsed. Ask "what else?" and wait.
+1. Open guide alongside a blank note doc.
+2. Skim participant profile — LinkedIn, prior emails, any client-shared notes.
+3. Confirm one objective for *this specific* interview (which research question lands heaviest with this person).
+
+## Step 3 — During the interview (45-60 min)
+
+Optimize for these behaviors:
+
+- **Listen past the polite answer.** First answer is rehearsed. Ask "what else?" and wait.
 - **Chase specifics.** "Last time" > "usually". "Show me" > "tell me".
-- **Mirror silence.** 5 seconds of silence after an answer often produces the real answer.
-- **Note surprises inline.** A margin mark like `[!]` — these become gold in synthesis.
+- **Mirror silence.** 5 seconds after an answer often produces the real answer.
+- **Note surprises inline** with `[!]`. These are gold during synthesis.
 - **Capture quotes verbatim** for anything that makes you raise your eyebrows.
 
-### After (20 min)
-Write `./discovery/interview-notes/p<NN>-<initials>.md` using the structure below. Do this **within 24 hours** — memory decays fast.
+## Step 4 — Capture (within 24 hours)
 
-## Note structure per interview
+Write `./discovery/interview-notes/p<NN>-<initials>.md` per `./template.md`.
 
-```markdown
-# P<NN> — <initials>, <role>, <date>
+**Within 24 hours.** Memory decays fast; Friday writeup of Tuesday interview = mostly fiction.
 
-## Context
-- How recruited:
-- Current role:
-- Relevant experience:
-
-## Pain points observed (with quotes)
--  [!] "..."
-
-## Workarounds
--
-
-## Surprises
--
-
-## Tools / systems mentioned
--
-
-## Willingness signals
-- Paid today for this?
-- Who else cares?
-
-## Referrals given
--
-
-## My confidence in this interview (1–5) and why
-```
-
-## Saturation tracking
+## Step 5 — Saturation tracking
 
 After each interview, write one line in `./discovery/interview-notes/_saturation-log.md`:
 ```
@@ -86,20 +58,23 @@ P01 — new themes: A, B, C
 P02 — new themes: D; confirmed: A
 P03 — new themes: none; confirmed: A, B
 ```
-Three consecutive "new themes: none" is the stop signal. Tell the user.
+
+Three consecutive "new themes: none" = saturation. Tell the user.
 
 ## Output
 
-- One note file per participant, `interview-notes/p<NN>-<initials>.md`.
-- Running `_saturation-log.md`.
+- `./discovery/interview-notes/p<NN>-<initials>.md` per participant
+- `./discovery/interview-notes/_saturation-log.md` running
+
+Append to `_log.md` after every interview: `[user-interviews | <date>] P<NN>: <one-line takeaway>`.
 
 ## Handoff
 
-Next phase: `insight-synthesis` (phase 6). Phase 5 (`market-competitive-scan`) runs in parallel if not already done.
+Next: `insight-synthesis` once saturation reached or window closes.
 
 ## Anti-patterns
 
-- **Pitching mid-interview.** The moment you describe a solution, you've lost the signal. Redirect if the participant asks "so what are you building?" with "honestly still figuring it out — what would an ideal solution even look like to you?" and route back to past behavior.
-- **Batching notes at the end of the week.** By Friday, Tuesday's interview is fuzzy. Write within 24 hours.
-- **Editing quotes.** Capture verbatim — even the filler words — for the 1–2 quotes per interview that will land in the final memo.
-- **Re-scoping mid-interview.** If the first 2 interviews reveal the problem is different, finish the round anyway, then loop phase 1.
+- **Pitching mid-interview.** The moment you describe a solution, signal dies. If asked "so what are you building?" → "honestly still figuring out — what would an ideal solution even look like to you?" and route back to past behavior.
+- **Batching writeup at week-end.** By Friday, Tuesday is fuzzy.
+- **Editing quotes for grammar.** Verbatim, including filler. The 1-2 quotes per interview that land in the final memo need authentic voice.
+- **Re-scoping mid-round.** If first 2 interviews reveal the problem is different — finish the round, then loop `problem-framing`.

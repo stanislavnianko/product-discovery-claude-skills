@@ -1,82 +1,96 @@
 ---
 name: risk-assumption-mapping
 description: >-
-  Phase 8 of the discovery-phase pack. Makes implicit assumptions
-  explicit across desirability, viability, feasibility, usability, and
-  ethical/legal axes. Ranks them by impact-if-wrong × evidence-today and
-  names the top 3 to retire before building. Produces
-  risk-assumption-map.md. Consumes opportunity-tree.md.
-track: core
-phase: 8
+  Synthesis group skill. Surfaces implicit assumptions across
+  desirability, viability, feasibility, usability, and ethical/legal
+  axes. Ranks by impact-if-wrong × evidence-today. Names top 3 to retire
+  before scoping. In outsourcing, also distinguishes client-owned vs
+  agency-owned vs shared risks. Produces risk-assumption-map.md.
+group: synthesis
 produces: risk-assumption-map.md
-consumes: opportunity-tree.md
+consumes: discovery-context.md, opportunity-tree.md
 origin: ECC
 ---
 
-# Phase 8 — Risk & Assumption Mapping
+# Risk & Assumption Mapping
 
-Every chosen solution hides a stack of unstated assumptions. This phase surfaces them so the phase-9 scope and phase-10/11 PoC can target the riskiest ones deliberately.
+Every chosen solution rides on unstated assumptions. This skill makes them visible. In outsourcing, also clarifies **whose** risk each one is — agency / client / shared — because this drives proposal language and SoW structure.
 
-## When to activate
+## Step 1 — Read context
 
-- After phase 7 picks a solution direction.
-- Before phase 9 (scope) — scope should concentrate effort on retiring the top assumptions.
-- Re-run if phase 10 (spike) reveals new feasibility unknowns.
+Read `discovery-context.md`. Halt if missing.
 
-## Inputs
+Read `opportunity-tree.md`. Halt if missing — risks are framed against the chosen solution.
 
-- `opportunity-tree.md` — chosen solution direction.
-- `insight-matrix.md` — for evidence scoring.
-- Team knowledge — this step benefits from both PM and engineering voices.
+Pull **3. Engagement** and **6. Constraints** from context — they shape what counts as a risk.
 
-## Procedure
+## Step 2 — Brainstorm by 5 axes
 
-### Step 1 — Brainstorm assumptions across 5 axes
-Ask, for the chosen solution:
+Aim for 2-3 assumptions per axis. If an axis has zero, push harder.
 
-- **Desirability** — do users actually want this? Would they pay (time / money / attention)?
-- **Viability** — does this help the business? Margin, acquisition cost, retention, strategic fit?
-- **Feasibility** — can we technically build it? Performance, data availability, model accuracy, scale?
-- **Usability** — can users figure it out without hand-holding?
-- **Ethical / legal** — privacy, consent, bias, compliance, accessibility floor.
+- **Desirability** — do users actually want this? Will they pay (money / time / political capital)?
+- **Viability** — does this help **the client's** business? Margin, CAC, retention, strategic fit
+- **Feasibility** — can the agency / client team technically build it? Performance, data, ML accuracy, integration
+- **Usability** — can users figure it out unassisted?
+- **Ethical / legal** — privacy, consent, bias, regulatory (per context section 6), accessibility floor
 
-Aim for 2–3 assumptions per axis. If an axis has zero, you're probably missing something — push harder.
+## Step 3 — Score each assumption
 
-### Step 2 — Score each assumption
-Two dimensions:
+| Field | Note |
+|---|---|
+| Assumption (specific, falsifiable) | "Users will accept a 5-step onboarding" not "users will like onboarding" |
+| Impact if wrong (1-5) | 5 = solution doesn't work at all if false |
+| Evidence today (1-5) | 1 = pure speculation; 5 = prior production validation |
+| Leverage = Impact × (6 − Evidence) | Higher = test first |
+| Test method | Spike / PoC / fake-door / paper / data analysis |
+| Retire-by signal | Specific observation that confirms safety |
+| **Kill signal** | Specific observation that means "don't build" |
 
-- **Impact if wrong (1–5):** if this assumption is false, does the solution still work? 5 = fatal.
-- **Evidence today (1–5):** how much data do we already have? 1 = pure speculation; 5 = prior-production-validated.
+## Step 4 — Tag risk owner (outsourcing-specific)
 
-Leverage = Impact × (6 − Evidence). High leverage = high impact + low evidence = test first.
+Per assumption, mark:
 
-### Step 3 — Name the top 3 to retire
-These 3 assumptions become explicit targets for phase 10 (spike) and/or phase 11 (PoC). If you can't retire the top 3 cheaply, that's a signal to KILL at phase 12.
+- **`[client]`** — client carries the risk (e.g., "client's user base will grow" — agency can't influence)
+- **`[agency]`** — agency carries it (e.g., "we have engineers with ML experience" — client can't fix)
+- **`[shared]`** — both (e.g., "client's data quality is good enough" — agency can validate, client must improve)
 
-### Step 4 — Design retire-by tests
-Per top assumption:
-- **Test method** — spike / PoC demo / fake-door / paper prototype / data analysis
-- **Retire-by signal** — what observation confirms the assumption is safe
-- **Kill signal** — what observation says the assumption is wrong and the project should stop
+This tagging shapes the proposal: agency-owned risks → priced into the proposal as agency contingency. Client-owned risks → become assumptions/exclusions in the SoW. Shared risks → flagged in proposal "what we need from you" section.
 
-### Step 5 — Pre-commit to kill criteria
-Before running any test, write the kill criterion explicitly. This prevents post-hoc rationalization when results are ambiguous.
+## Step 5 — Top 3 to retire before building
+
+Highest-leverage 3 assumptions. These become explicit targets for:
+- `feasibility-spike` (validation group) for technical assumptions
+- `prototype-plan` for product/UX assumptions
+- Additional evidence-gathering for desirability assumptions
+- Workshops / contracts for shared/client assumptions
+
+## Step 6 — Pre-commit kill criteria
+
+For each top-3 assumption, write the kill criterion **before** running any test:
+
+> "If fewer than 30% of test users complete the core flow unassisted within 3 minutes, we don't build."
+
+Without pre-commit, post-hoc rationalization eats the discovery.
+
+## Step 7 — Risk register summary for proposal/SoW
+
+Add a section the deliverable skills will consume:
+
+| Risk | Owner | Mitigation if not retired during discovery |
+|---|---|---|
+
+This becomes the input to `proposal` and `sow-draft` risk sections.
 
 ## Output
 
-`./discovery/risk-assumption-map.md` following the shared template.
+`./discovery/risk-assumption-map.md` per `./template.md`.
 
-## Handoff
-
-Next phase: `scope-mvp-definition` (phase 9). The top 3 assumptions anchor the scope.
+Append to `_log.md`: `[risk-assumption-mapping | <date>] axes covered: 5; total: <N>; client-owned: <N>; agency-owned: <N>; shared: <N>; top-3 leverage: <list>`.
 
 ## Anti-patterns
 
-- **Feasibility-only risks.** Engineers naturally list tech risks. Force desirability + viability + ethical — those kill more projects.
-- **Risks without kill criteria.** A risk is a risk only if its failure would change behavior. If you'd build anyway, it's a concern, not a risk.
-- **Generic assumptions.** "Users will like it" isn't testable. "5+ users will complete the core flow unassisted in <3 minutes" is.
-- **Too many top assumptions.** If your "top 3" is actually 7, your solution is 7 bets disguised as 1 — cut scope first.
-
-## Shared template
-
-`orchestrator/templates/risk-assumption-map.md`
+- **Feasibility-only risks.** Engineers default to tech risks. Force desirability + viability + ethical — those kill more outsourced projects than tech does.
+- **Risks without kill criteria.** A risk you'd build through anyway is a concern, not a risk.
+- **Generic assumptions.** "Users will like it" is untestable. "5+ users will complete the core flow unassisted in <3 min" is.
+- **Skipping owner-tagging.** In outsourcing, who-owns-the-risk drives commercial structure. Without tags, proposal language gets fuzzy and the agency eats client risks.
+- **Top-3 that's actually 7.** If your top-3 has 7 entries, the solution is 7 bets disguised as 1 — cut scope first via `feature-scoping`.

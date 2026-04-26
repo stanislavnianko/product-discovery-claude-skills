@@ -7,28 +7,39 @@ REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SOURCE_DIR="$REPO_DIR/plugins/discovery-phase/skills"
 
 TARGET_DIR="$HOME/.claude/skills"
-TRACK="all"              # all | core
+GROUP=""                  # empty = all; otherwise restrict to this group
 FORCE=0
 DRY_RUN=0
-MODE="copy"              # copy | link
+MODE="copy"               # copy | link
 
 usage() {
   cat <<EOF
 Usage: ./install.sh [options]
 
-  core                  Install only track=core skills (skip tech-poc phases)
-  all                   Install every skill (default)
+  --group <name>        Install only skills in this group
+                        (foundation, discovery, evidence, synthesis,
+                         scoping, validation, deliverables)
   --project <path>      Install to <path>/.claude/skills/ instead of ~/.claude/skills/
   --link                Symlink instead of copy (live edits reflect immediately)
   --force               Overwrite existing skill folders
   --dry-run             List actions without touching the filesystem
   -h, --help            Show this help
+
+Examples:
+  ./install.sh                              Install all 22 skills globally
+  ./install.sh --group foundation           Just profile-builder + conductor
+  ./install.sh --group evidence --project . Install evidence group into current dir
+  ./install.sh --link --force               Dev mode: symlink, overwrite
+
+NOTE: For Claude Cowork / Code, the preferred path is the plugin marketplace:
+  /plugin marketplace add https://github.com/stanislavnianko/product-discovery-claude-skills
+  /plugin install discovery-phase
 EOF
 }
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    core|all) TRACK="$1"; shift ;;
+    --group) GROUP="$2"; shift 2 ;;
     --project) TARGET_DIR="$2/.claude/skills"; shift 2 ;;
     --link) MODE="link"; shift ;;
     --force) FORCE=1; shift ;;
@@ -38,9 +49,9 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-skill_track() {
+skill_group() {
   local skill_md="$1"
-  awk '/^---$/{n++;next} n==1 && /^track:/{print $2; exit}' "$skill_md"
+  awk '/^---$/{n++;next} n==1 && /^group:/{print $2; exit}' "$skill_md"
 }
 
 mkdir -p "$TARGET_DIR"
@@ -55,9 +66,11 @@ for skill_path in "$SOURCE_DIR"/*/; do
     echo "skip (no SKILL.md): $name"; continue
   fi
 
-  t="$(skill_track "$skill_md" || true)"
-  if [[ "$TRACK" == "core" && "$t" == "tech-poc" ]]; then
-    echo "skip (tech-poc, --core): $name"; ((skipped++)) || true; continue
+  if [[ -n "$GROUP" ]]; then
+    g="$(skill_group "$skill_md" || true)"
+    if [[ "$g" != "$GROUP" ]]; then
+      echo "skip (group=$g != $GROUP): $name"; ((skipped++)) || true; continue
+    fi
   fi
 
   dest="$TARGET_DIR/$name"
