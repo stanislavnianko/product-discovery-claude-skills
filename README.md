@@ -186,13 +186,6 @@ Confirms every SKILL.md has valid frontmatter with `name` + `description`, plus 
 
 Pre-1.0 history (12-phase orchestrator pattern) was wiped on the v1.0 release. If you need it, check the `v0.1.0` git tag.
 
-## Credits
-
-- Pattern from [charlie947/social-media-skills](https://github.com/charlie947/social-media-skills) — voice-builder → downstream-skills foundation model
-- Initial structure inspired by [deanpeters/Product-Manager-Skills](https://github.com/deanpeters/Product-Manager-Skills)
-- Opportunity-solution-tree methodology: Teresa Torres
-- Desirability/Viability/Feasibility framing: IDEO
-
 ## License
 
 MIT — see [LICENSE](LICENSE).
