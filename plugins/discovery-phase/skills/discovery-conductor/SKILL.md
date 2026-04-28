@@ -25,13 +25,21 @@ The optional "guide me through this" skill. Most experienced users skip the cond
 
 **Do not activate** if the BA names specific skills directly — they know what they want.
 
-## Step 1 — Read context
+## Step 1 — Read context (recommended, not required)
 
-Read `discovery-context.md`. If missing:
+Try to read `discovery-context.md`.
 
-> "Run `profile-builder` first. The conductor needs context to recommend the right sequence. Halting."
+**If present:** Pull all 7 sections — the conductor reads everything to plan the sequence.
 
-Pull all 7 sections — the conductor reads everything to plan the sequence.
+**If missing:** Tell the BA:
+> "I can recommend a sequence without `discovery-context.md`, but it'll be generic. Three options:
+> 1. Run `profile-builder` first — best results (recommended)
+> 2. Answer 2 quick questions inline (engagement mode + user access level) so I can pick a sequence right now
+> 3. Just show me the generic full sequence — I'll pick myself"
+>
+> Which?"
+
+Default to option 2 if unclear. Never block.
 
 ## Step 2 — Pick a recommended sequence
 

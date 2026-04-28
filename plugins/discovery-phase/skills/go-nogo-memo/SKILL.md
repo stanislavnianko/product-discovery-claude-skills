@@ -24,13 +24,23 @@ The terminal decision document. Everything before this fed into it; everything a
 
 Differs from `proposal`: proposal is commercial (here's what we'd do, please sign); memo is decisional (here's what we believe, please decide). They can co-exist.
 
-## Step 1 — Read context + scan evidence
+## Step 1 — Read context + scan evidence (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing.
+Try to read `discovery-context.md`.
 
-Pull **5. Expected deliverable** — must include "go-no-go memo" or be ambiguous.
+**If present:** Pull **5. Expected deliverable**.
 
-Scan `./discovery/` for available artifacts. Even partial discovery can produce a memo, but flag the gaps.
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. The memo can still be written from whatever evidence is on disk. Three options:
+> 1. Run `profile-builder` first (recommended)
+> 2. Bootstrap inline — I'll ask 1 question: who's the decision-owner (client / agency / both) and what decision are we framing (proceed / pivot / kill)?
+> 3. Proceed and infer the framing from available artifacts, tagged `[ASSUMED FRAMING]`"
+>
+> Which?"
+
+Default to option 2. Never block.
+
+Scan `./discovery/` for available artifacts. Even partial discovery can produce a memo, but flag the gaps explicitly in the memo's "Evidence basis" section.
 
 ## Step 2 — Force the decision first
 

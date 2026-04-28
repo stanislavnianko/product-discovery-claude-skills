@@ -4,8 +4,9 @@ description: >-
   Foundation skill for the discovery-phase pack. Interviews the BA about
   the client, the product/initiative, the engagement model, access
   constraints, and expected deliverable. Writes a single
-  discovery-context.md to the project root. EVERY other skill in this
-  pack reads that file at start and halts if missing. Run this first.
+  discovery-context.md to the project root. Every other skill in this
+  pack recommends reading it; running it first gives the best results,
+  but other skills will offer inline bootstrap if you skip ahead.
   TRIGGER when the user says "build my discovery profile", "set up
   discovery context", "start a new client engagement", or activates any
   other discovery-phase skill before this one has run.
@@ -15,7 +16,7 @@ origin: ECC
 
 # Profile Builder
 
-Produces `discovery-context.md` — the single source of truth that every other skill in this pack reads. Without it, no other skill in the pack will execute.
+Produces `discovery-context.md` — the single source of truth that every other skill in this pack reads. Without it, other skills will warn and offer to bootstrap inline (a 2–3 question mini-interview held in conversation, not written to disk). Running this skill first gives the best, most consistent results.
 
 ## Activation rule
 
@@ -108,11 +109,13 @@ Then state: **"Discovery context written. Other skills in this pack will now run
 
 ## What downstream skills consume
 
-Every other skill in the pack starts with:
+Every other skill in the pack starts with the soft-gate pattern:
 ```
-Read `discovery-context.md` from project root. If missing, tell the user
-to run `profile-builder` first ("say `build my discovery profile`"),
-then stop.
+Read `discovery-context.md` from project root. If missing, offer the BA
+three options: (1) run `profile-builder` first, (2) bootstrap inline via
+2–3 questions for this run only, or (3) proceed and tag every assumption
+as `[ASSUMED]` in the output. Default to option 2 if the BA says "just go".
+Never block.
 ```
 
 Specifically:

@@ -18,19 +18,40 @@ Statement of Work draft for the legal team to harden. The discovery team's job i
 
 > **This skill produces a draft, not a contract.** Always route through agency legal + client legal before signing. The discovery team should not be the last line of defense on contract terms.
 
-## Step 1 — Read context + prerequisites
+## Step 1 — Read context + prerequisites (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing.
+Try to read `discovery-context.md`.
 
-Pull **3. Engagement → Budget context** (drives payment structure), **6. Constraints** (regulatory clauses).
+**If present:** Pull **3. Engagement → Budget context** (drives payment structure), **6. Constraints** (regulatory clauses).
 
-Required reads:
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. SoW commercial language depends on engagement shape, so this matters. Three options:
+> 1. Run `profile-builder` first (recommended)
+> 2. Bootstrap inline — I'll ask 2 questions: (a) budget structure (fixed-fee / T&M / milestone-based), (b) regulatory constraints (GDPR / HIPAA / SOC2 / none) (fast)
+> 3. Proceed with generic fixed-fee + no-regulatory framing, tagged `[ASSUMED COMMERCIAL]` and DRAFT-ONLY"
+>
+> Which?"
+
+Default to option 2. Never block.
+
+**Required-input artifacts:** Try to read these.
+
 - `scope-doc.md` — deliverables and exclusions
 - `estimation.md` — pricing structure
 
 Recommended:
 - `proposal.md` — gives the language already shared with client; SoW should be consistent (don't introduce new scope here)
 - `risk-assumption-map.md` — informs warranty language
+
+**If `scope-doc.md` or `estimation.md` is missing**, tell the BA:
+> "Heads-up: SoW without scope or pricing is not a contract draft, it's a template. Three options:
+> 1. Run `feature-scoping` and/or `estimation` first (recommended — required for any client-routable SoW)
+> 2. Bootstrap inline — paste deliverable bullets and pricing structure (fast, draft-only)
+> 3. Proceed with `[TBD]` placeholders in those sections — output marked DRAFT-ONLY, NOT for legal review until placeholders resolved"
+>
+> Which?"
+
+Default to option 2. Never block — but the DRAFT-ONLY banner is non-removable when option 3 is picked.
 
 ## Step 2 — Section walkthrough
 

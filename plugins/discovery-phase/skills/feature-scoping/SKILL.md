@@ -16,14 +16,29 @@ origin: ECC
 
 The boundary-drawing skill. Output is a scope doc precise enough that engineering can estimate it and the client can sign off on it. Built to be paste-able into a proposal or SoW (commercial documents) with minimal rework.
 
-## Step 1 — Read context
+## Step 1 — Read context (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing.
+Try to read `discovery-context.md`.
 
-Read `opportunity-tree.md`. If missing, recommend `opportunity-mapping` first.
-Read `risk-assumption-map.md`. If missing, scope-without-risk-context is fragile — recommend `risk-assumption-mapping` first, but allow override.
+**If present:** Pull **3. Engagement** (timeline + budget context shape what's realistic), **5. Expected deliverable** (drives output framing), **6. Constraints**.
 
-Pull from context: **3. Engagement** (timeline + budget context shape what's realistic), **5. Expected deliverable** (drives output framing), **6. Constraints**.
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Three options:
+> 1. Run `profile-builder` first (recommended)
+> 2. Bootstrap inline — I'll ask 2 questions: (a) timeline + budget shape (days / weeks / month / quarter), (b) any hard constraints (NDA / regulatory / tech-stack lock-in) (fast)
+> 3. Proceed assuming a generic 4-week paid-discovery shape, tagged `[ASSUMED ENGAGEMENT]`"
+>
+> Which?"
+
+Default to option 2. Never block.
+
+Try to read `opportunity-tree.md`. If missing, tell the BA:
+> "`opportunity-tree.md` missing. Three options: (1) run `opportunity-mapping` first (recommended), (2) tell me the solution direction in one line so I can scope against it, (3) proceed without solution framing — scope will be tagged `[NO-SOLUTION-DIRECTION]` and likely too generic to estimate cleanly."
+
+Try to read `risk-assumption-map.md`. If missing, tell the BA:
+> "`risk-assumption-map.md` missing. Scope-without-risk-context is fragile. Three options: (1) run `risk-assumption-mapping` first (recommended), (2) name 1–3 top assumptions to retire inline, (3) proceed without — scope will be feature-driven rather than assumption-driven and tagged `[NO-RISK-FRAME]`."
+
+Default to option 2 in both cases. Never block.
 
 ## Step 2 — State the MVP job
 

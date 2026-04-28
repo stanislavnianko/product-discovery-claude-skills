@@ -16,12 +16,33 @@ origin: ECC
 
 Answers two questions: **what's already out there**, and **why haven't users adopted it for this problem?** The second is more important.
 
-## Step 1 — Read discovery context
+## Step 1 — Read inputs (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing.
+Try to read `discovery-context.md`.
 
-Pull **1. Client → Domain**, **2. Product / Initiative**.
-Read `problem-canvas.md`; halt if missing — without a framed problem, the scan is shapeless.
+**If present:** Pull **1. Client → Domain**, **2. Product / Initiative**.
+
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Three options:
+> 1. Run `profile-builder` first (recommended)
+> 2. Bootstrap inline — I'll ask 1 question: client domain + product type in one line (fast)
+> 3. Proceed with whatever domain you give me right now, tagged `[ASSUMED DOMAIN]`"
+>
+> Which?"
+
+Try to read `problem-canvas.md`.
+
+**If present:** Anchor the scan against the framed problem.
+
+**If missing:** Tell the BA:
+> "Heads-up: `problem-canvas.md` is missing. Without a framed problem the scan tends to drift into general-purpose competitor mapping. Three options:
+> 1. Run `problem-framing` first (recommended)
+> 2. Bootstrap inline — I'll ask 2 questions: (a) what problem in one line, (b) what success signal would matter (fast, lower fidelity)
+> 3. Proceed without a problem frame — the scan will be a general competitor list, tagged `[NO-PROBLEM-FRAME]` so reviewers know the gap analysis is weak"
+>
+> Which?"
+
+Default to option 2 in both cases. Never block.
 
 ## Step 2 — List competitive set in 3 layers
 

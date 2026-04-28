@@ -16,11 +16,23 @@ origin: ECC
 
 Turns whatever evidence the BA managed to gather into structured insights — weighted by source quality so the team doesn't treat one SME's hunch as equal to five user interviews.
 
-## Step 1 — Read discovery context
+## Step 1 — Read discovery context (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing.
+Try to read `discovery-context.md`.
 
-Pull **4. Access & Data** to know what evidence to expect. Then scan `./discovery/` for actually-present artifacts:
+**If present:** Pull **4. Access & Data** to know what evidence to expect.
+
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Synthesis still works — I'll just synthesize from whatever evidence files I find. Three options:
+> 1. Run `profile-builder` first (recommended for proper source-weighting)
+> 2. Bootstrap inline — I'll ask 1 question: which evidence types should I expect (interviews / SMEs / tickets / secondary / competitive / mix), so I can weight sources properly (fast)
+> 3. Proceed and weight all sources equally, tagged `[NO-WEIGHTING-CONTEXT]`"
+>
+> Which?"
+
+Default to option 2. Never block.
+
+Then scan `./discovery/` for actually-present artifacts:
 - `interview-notes/*.md` (direct evidence — highest weight)
 - `sme-notes/*.md` (proxy evidence — medium weight)
 - `support-data-analysis.md` (unsolicited signal — high weight)

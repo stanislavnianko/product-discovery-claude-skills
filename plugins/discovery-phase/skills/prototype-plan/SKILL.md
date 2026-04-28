@@ -16,18 +16,50 @@ origin: ECC
 
 A prototype proves user/product assumptions in a realistic environment. Built minimally, demoed deliberately, torn down by contract.
 
-## Step 1 — Read context
+## Step 1 — Read context (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing.
+Try to read `discovery-context.md`.
 
-Pull **3. Engagement** (mode + budget context drive prototype ambition).
-Read `scope-doc.md` — prototype is a slice of MVP scope.
-Read `risk-assumption-map.md` for the top-3 assumptions.
-Read `tech-spike-report.md` if it exists. If feasibility was Red, halt and tell user to resolve before building.
+**If present:** Pull **3. Engagement** (mode + budget context drive prototype ambition).
 
-## Step 2 — Engineering capacity check
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Three options:
+> 1. Run `profile-builder` first (recommended)
+> 2. Bootstrap inline — I'll ask 1 question: who's running the prototype build (solo BA / BA + engineer / engineering lead)?
+> 3. Proceed assuming engineering capacity is available, tagged `[ASSUMED]`"
+>
+> Which?"
 
-Same gate as `feasibility-spike`: if context shows no engineering capacity, halt and ask the BA to either loop in engineering or defer to post-contract.
+Default to option 2. Never block.
+
+Try to read `scope-doc.md` — prototype is a slice of MVP scope. If missing, recommend `feature-scoping` first or proceed with scope tagged `[NO-SCOPE-DOC]`.
+
+Try to read `risk-assumption-map.md` for the top-3 assumptions. If missing, ask BA to name 1–3 assumptions inline or proceed tagged `[NO-RISK-FRAME]`.
+
+Try to read `tech-spike-report.md` if it exists.
+
+**If feasibility was Red:** Tell the BA:
+> "⚠ Reality check: `tech-spike-report.md` says feasibility is Red. Building a prototype on Red feasibility means the prototype tests politics, not tech. Three options:
+> 1. Resolve the feasibility blocker first (re-spike, re-scope, or pivot via `opportunity-mapping`) — recommended
+> 2. Defer to post-contract / delivery phase
+> 3. Proceed anyway — output gets a `⚠ RED-FEASIBILITY-OVERRIDE` banner; tear-down plan must be aggressive"
+>
+> Which?"
+
+Never auto-halt.
+
+## Step 2 — Engineering capacity reality-check (warn + confirm, do not halt)
+
+Same pattern as `feasibility-spike`: if context shows no engineering capacity, tell the BA:
+> "⚠ Reality check: this skill assumes engineering capacity. Without an engineer, the prototype plan will be conceptual rather than runnable. Four choices:
+> 1. Loop in an engineer (recommended)
+> 2. Defer to post-contract / delivery phase
+> 3. Switch to `feasibility-spike` (smaller, may be doable solo)
+> 4. Proceed solo anyway — `poc-plan.md` will get a `⚠ NO-ENGINEER-OVERRIDE` banner and the runnable skeleton step (Step 8) will be skipped or stubbed"
+>
+> Which?"
+
+Never auto-halt.
 
 ## Step 3 — State the prototype objective
 

@@ -16,14 +16,21 @@ origin: ECC
 
 Turns whatever the client said into a testable, falsifiable hypothesis. If the client already proposed a solution (very common in outsourcing), this skill **un-pitches** it back into a problem statement before anything downstream runs.
 
-## Step 1 — Read discovery context
+## Step 1 — Read discovery context (recommended, not required)
 
-Read `discovery-context.md` from project root.
-
-**If missing:** Stop and tell the user:
-> "I need a discovery context to work with. Run `profile-builder` first (say `build my discovery profile`), then come back. Halting now."
+Try to read `discovery-context.md` from project root.
 
 **If present:** Pull sections **1. Client**, **2. Product / Initiative**. If section 2 says the client already proposed a solution, flag it — this skill will need to extract the underlying problem from that solution rather than starting clean.
+
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Best results come from running `profile-builder` first. Three options:
+> 1. Run `profile-builder` now and come back (recommended for high-stakes work)
+> 2. Bootstrap inline — I'll ask 3 quick questions: (a) client name + sector, (b) what's being explored in one line, (c) did the client propose the solution or did the agency? (fast, lower fidelity)
+> 3. Proceed without context — I'll flag every section as `[ASSUMED]` in the canvas"
+>
+> Which?"
+
+Default to option 2 if the BA says "just go" or similar. Never block.
 
 ## Step 2 — Forbid solution-speak (mid-skill rule)
 

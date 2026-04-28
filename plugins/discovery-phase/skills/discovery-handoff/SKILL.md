@@ -25,11 +25,23 @@ When discovery ends and delivery begins — possibly with a different team. This
 
 Distinct from `proposal` (commercial) and `go-nogo-memo` (decision). Handoff is **operational**.
 
-## Step 1 — Read context + scan available artifacts
+## Step 1 — Read context + scan available artifacts (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing.
+Try to read `discovery-context.md`.
 
-Scan `./discovery/` directory for what's actually present. Build an inventory at top of doc.
+**If present:** Pull whatever's needed for handoff framing.
+
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. The handoff doc can still be written from whatever artifacts are on disk. Three options:
+> 1. Run `profile-builder` first (recommended)
+> 2. Bootstrap inline — I'll ask 1 question: who's the receiving team (same agency / different agency / client internal / mixed)?
+> 3. Proceed and infer from artifacts present, tagged `[ASSUMED RECEIVER]`"
+>
+> Which?"
+
+Default to option 2. Never block.
+
+Scan `./discovery/` directory for what's actually present. Build an inventory at top of doc — this is critical: a handoff doc that overstates what's been discovered misleads the delivery team.
 
 ## Step 2 — Identify the receiving team
 

@@ -17,22 +17,41 @@ origin: ECC
 
 Agency-to-client proposal document. The output the client reads, signs (or doesn't), and budgets against.
 
-## Step 1 — Read context + prerequisites
+## Step 1 — Read context + prerequisites (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing.
+Try to read `discovery-context.md`.
 
-Pull **3. Engagement → Mode** (must be pre-sale or paid-discovery; if mode is staff aug or internal, suggest `discovery-handoff` instead) and **5. Expected deliverable** (must include "proposal").
+**If present:** Pull **3. Engagement → Mode** (if mode is staff aug or internal, suggest `discovery-handoff` instead — but allow override) and **5. Expected deliverable**.
 
-Required reads:
-- `scope-doc.md` — provides scope language verbatim
-- `estimation.md` — provides effort + assumption list
-- `risk-assumption-map.md` — provides risk register
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Three options:
+> 1. Run `profile-builder` first (recommended)
+> 2. Bootstrap inline — I'll ask 2 questions: (a) engagement mode (pre-sale / paid discovery / other), (b) client name + sector (fast)
+> 3. Proceed with generic engagement framing, tagged `[ASSUMED]`"
+>
+> Which?"
+
+Default to option 2. Never block.
+
+**Prerequisite artifacts:** Try to read these. They're the proposal's substance.
+
+- `scope-doc.md` — scope language
+- `estimation.md` — effort + assumption list
+- `risk-assumption-map.md` — risk register
 
 Strongly recommended:
 - `problem-canvas.md` — anchors problem statement
 - `opportunity-tree.md` — supports recommended-approach narrative
 
-If 2+ of the required artifacts are missing, halt and tell BA which prerequisite skills to run first.
+**If any required artifact is missing**, tell the BA:
+> "Heads-up: missing prerequisite artifacts: `<list>`. A proposal without scope or estimation is unusable for client signature. Three options:
+> 1. Run the prerequisite skills first (`feature-scoping`, `estimation`, `risk-assumption-mapping`) — recommended for any client-facing proposal
+> 2. Bootstrap inline — for each missing artifact, give me 3–5 bullets I can use as a stand-in (fast, suitable for internal draft only)
+> 3. Proceed with `[ASSUMED <artifact>]` placeholder sections — output marked DRAFT-ONLY at the top, NOT for client send"
+>
+> Which?"
+
+Default to option 2 if 1–2 artifacts missing. If 3+ missing, recommend option 1 explicitly. Never block — but the auto-applied DRAFT-ONLY banner is non-removable when option 3 is picked.
 
 ## Step 2 — Pick proposal style
 

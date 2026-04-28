@@ -15,11 +15,21 @@ origin: ECC
 
 Two-tier map for outsourcing reality: client stakeholders + agency stakeholders. The agency tier is the one most often forgotten, and it's where engagement-killers (sales conflict, delivery capacity, partner dependencies) live.
 
-## Step 1 — Read discovery context
+## Step 1 — Read discovery context (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing (run `profile-builder` first).
+Try to read `discovery-context.md`.
 
-Pull sections **1. Client → Decision-makers**, **3. Engagement → Runner role**.
+**If present:** Pull sections **1. Client → Decision-makers**, **3. Engagement → Runner role**.
+
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Best results come from running `profile-builder` first. Three options:
+> 1. Run `profile-builder` now and come back (recommended)
+> 2. Bootstrap inline — I'll ask 2 quick questions: (a) name 1–3 client decision-makers + role, (b) what's the engagement mode (pre-sale / paid discovery / delivery / staff aug)? (fast, lower fidelity)
+> 3. Proceed without it — I'll tag every stakeholder field that lacks grounding as `[ASSUMED]`"
+>
+> Which?"
+
+Default to option 2 if the BA says "just go". Never block.
 
 Read `problem-canvas.md` if it exists, to anchor stakeholders against the actual problem; if absent, proceed (this skill works standalone).
 

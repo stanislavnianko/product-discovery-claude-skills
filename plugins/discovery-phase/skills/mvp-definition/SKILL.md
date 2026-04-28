@@ -23,13 +23,35 @@ A clarifier skill — runs when "what is the MVP, exactly?" comes up. Distinguis
 - After `feature-scoping` to validate the scope is actually MVP-shaped
 - During pre-sale conversations to align expectations
 
-## Step 1 — Read context
+## Step 1 — Read context (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing.
+Try to read `discovery-context.md`.
 
-Read `risk-assumption-map.md`; pull the top-3 assumptions to retire. These are what the MVP must validate.
+**If present:** Pull whatever's needed downstream.
 
-Read `scope-doc.md` if it exists — the scope-doc and MVP-definition reinforce each other.
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Three options:
+> 1. Run `profile-builder` first (recommended)
+> 2. Bootstrap inline — I'll ask 1 question: client stage (pre-launch / early traction / scaling / mature) so I can pick the right MVP framing
+> 3. Proceed with generic MVP framing, tagged `[ASSUMED]`"
+>
+> Which?"
+
+Default to option 2. Never block.
+
+Try to read `risk-assumption-map.md` to pull the top-3 assumptions to retire.
+
+**If missing:** Tell the BA:
+> "Heads-up: `risk-assumption-map.md` is missing. The top-3 assumptions are what the MVP must validate, so this matters. Three options:
+> 1. Run `risk-assumption-mapping` first (recommended)
+> 2. Bootstrap inline — name 1–3 assumptions to retire in one sentence each (fast)
+> 3. Proceed without a risk anchor — MVP scope will be feature-driven rather than learning-driven, tagged `[NO-RISK-FRAME]`"
+>
+> Which?"
+
+Default to option 2. Never block.
+
+Read `scope-doc.md` if it exists — the scope-doc and MVP-definition reinforce each other. If absent, this skill still works standalone.
 
 ## Step 2 — Three-level table
 

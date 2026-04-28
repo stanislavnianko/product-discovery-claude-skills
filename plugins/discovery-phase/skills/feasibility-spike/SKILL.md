@@ -3,9 +3,9 @@ name: feasibility-spike
 description: >-
   Validation group skill. Time-boxed engineering investigation targeting
   the top feasibility assumptions from risk-assumption-map. Produces
-  tech-spike-report.md and disposable code. Reads discovery-context.md.
-  Halts politely if no engineering capacity is reflected in the
-  engagement context.
+  tech-spike-report.md and disposable code. Warns (does not halt) if no
+  engineering capacity is reflected in the engagement context — output
+  is tagged speculative if the BA chooses to proceed solo.
 group: validation
 produces: tech-spike-report.md
 consumes: discovery-context.md, risk-assumption-map.md, scope-doc.md (optional)
@@ -16,19 +16,48 @@ origin: ECC
 
 Kill the biggest technical risks cheaply. Throwaway by contract.
 
-## Step 1 — Read context
+## Step 1 — Read context (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing.
+Try to read `discovery-context.md`.
 
-Pull **3. Engagement → Runner role**. If runner is **solo BA** with no engineering support listed, tell user:
+**If present:** Pull **3. Engagement → Runner role**.
 
-> "This skill needs an engineer. Your engagement context says runner is `<runner>`. Either:
-> 1. Loop in an engineer (update context with their name)
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Three options:
+> 1. Run `profile-builder` first (recommended)
+> 2. Bootstrap inline — I'll ask 1 question: who's running the spike (solo BA / BA + engineer / engineering lead)?
+> 3. Proceed assuming engineering capacity is available, tagged `[ASSUMED ENGINEERING]`"
+>
+> Which?"
+
+Default to option 2. Never block.
+
+**Engineering capacity reality-check (warn + confirm, do not halt):**
+
+If runner is **solo BA** with no engineering support listed, tell the BA:
+> "⚠ Reality check: this skill assumes engineering capacity. Your context says runner is `<runner>`. Without an engineer the spike will produce a spike-shaped artifact with weak engineering signal. Four choices:
+> 1. Loop in an engineer (update context with their name) — recommended
 > 2. Defer the spike to post-contract / delivery phase
-> 3. Skip and accept the feasibility risk in the proposal
-> Pick one — halting until decided."
+> 3. Skip and accept the feasibility risk explicitly in the proposal
+> 4. Proceed solo anyway — output will get a `⚠ NO-ENGINEER-OVERRIDE` banner and findings tagged `[SPECULATIVE]`"
+>
+> Which?"
 
-Read `risk-assumption-map.md`. Halt if missing — spike without an assumption is exploration.
+Never auto-halt. If the BA picks option 4, proceed and add the banner at the top of `tech-spike-report.md`.
+
+Try to read `risk-assumption-map.md`.
+
+**If present:** Anchor the spike to a specific assumption.
+
+**If missing:** Tell the BA:
+> "Heads-up: `risk-assumption-map.md` is missing. A spike without an assumption is exploration, not a spike. Three options:
+> 1. Run `risk-assumption-mapping` first (recommended)
+> 2. Bootstrap inline — name 1–3 feasibility assumptions to test in one sentence each (fast)
+> 3. Proceed as open exploration — output will be tagged `[EXPLORATION-NOT-SPIKE]` so reviewers know it's not assumption-driven"
+>
+> Which?"
+
+Default to option 2. Never block.
 
 ## Step 2 — State spike goal
 

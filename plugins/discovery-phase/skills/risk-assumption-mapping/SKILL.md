@@ -16,13 +16,35 @@ origin: ECC
 
 Every chosen solution rides on unstated assumptions. This skill makes them visible. In outsourcing, also clarifies **whose** risk each one is — agency / client / shared — because this drives proposal language and SoW structure.
 
-## Step 1 — Read context
+## Step 1 — Read context (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing.
+Try to read `discovery-context.md`.
 
-Read `opportunity-tree.md`. Halt if missing — risks are framed against the chosen solution.
+**If present:** Pull **3. Engagement** and **6. Constraints** — they shape what counts as a risk.
 
-Pull **3. Engagement** and **6. Constraints** from context — they shape what counts as a risk.
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Three options:
+> 1. Run `profile-builder` first (recommended)
+> 2. Bootstrap inline — I'll ask 2 questions: (a) engagement mode (pre-sale / paid discovery / delivery / staff aug), (b) any regulatory or ethical constraints (GDPR / HIPAA / SOC2 / accessibility floor / none) (fast)
+> 3. Proceed without engagement framing — risks won't be split client/agency/shared, just listed flat, tagged `[NO-OWNERSHIP]`"
+>
+> Which?"
+
+Default to option 2. Never block.
+
+Try to read `opportunity-tree.md`.
+
+**If present:** Frame risks against the chosen solution direction.
+
+**If missing:** Tell the BA:
+> "Heads-up: `opportunity-tree.md` is missing. Risks need a solution direction to be framed against. Three options:
+> 1. Run `opportunity-mapping` first (recommended)
+> 2. Bootstrap inline — answer 1 question: what solution direction are we evaluating, in one line? (fast)
+> 3. Proceed and brainstorm risks against the problem (rather than a specific solution), tagged `[NO-SOLUTION-FRAME]`"
+>
+> Which?"
+
+Default to option 2. Never block.
 
 ## Step 2 — Brainstorm by 5 axes
 

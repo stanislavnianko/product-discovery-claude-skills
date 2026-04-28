@@ -16,11 +16,21 @@ origin: ECC
 
 The most underused evidence source in outsourcing discovery. Users complain in tickets, chats, and NPS comments without any selection bias from interview recruitment. The data already exists — just nobody read it systematically.
 
-## Step 1 — Read discovery context
+## Step 1 — Read discovery context (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing.
+Try to read `discovery-context.md`.
 
-Pull **4. Access & Data → Data we can request**, **6. Constraints** (PII, regulatory).
+**If present:** Pull **4. Access & Data → Data we can request**, **6. Constraints** (PII, regulatory).
+
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Three options:
+> 1. Run `profile-builder` first (recommended)
+> 2. Bootstrap inline — I'll ask 2 questions: (a) which data sources are realistically available (tickets / NPS / chat / calls / analytics / none), (b) any regulatory constraints (HIPAA / GDPR / SOC2 / none) (fast)
+> 3. Proceed assuming standard tickets + NPS access, tagged `[ASSUMED ACCESS]`"
+>
+> Which?"
+
+Default to option 2. Never block.
 
 If no data sources listed in section 4, ask BA: "What data does the client have that we could request access to? Tickets / NPS / chat / call recordings / analytics?" Then update the context file.
 

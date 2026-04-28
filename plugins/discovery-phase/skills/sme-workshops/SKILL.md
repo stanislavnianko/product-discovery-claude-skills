@@ -16,11 +16,21 @@ origin: ECC
 
 Use when direct user access is blocked but the client has people who interact with the user daily — customer success, support, sales, ops, internal tool admins. Their view is **proxy** evidence: faster to access, lower fidelity than direct.
 
-## Step 1 — Read discovery context
+## Step 1 — Read discovery context (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing.
+Try to read `discovery-context.md`.
 
-Pull **1. Client → Decision-makers**, **4. Access & Data → Client SMEs**. If no SMEs listed, ask BA to list them now (and update the context file).
+**If present:** Pull **1. Client → Decision-makers**, **4. Access & Data → Client SMEs**. If no SMEs listed, ask BA to list them now (and update the context file).
+
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Three options:
+> 1. Run `profile-builder` first (recommended)
+> 2. Bootstrap inline — I'll ask 1 question: which client SMEs are accessible (names + roles, or 'none yet') (fast)
+> 3. Proceed and ask SME-recruitment questions before workshop planning, tagged `[ASSUMED]`"
+>
+> Which?"
+
+Default to option 2. Never block.
 
 ## Step 2 — Choose workshop format
 

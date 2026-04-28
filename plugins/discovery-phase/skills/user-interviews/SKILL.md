@@ -2,9 +2,11 @@
 name: user-interviews
 description: >-
   Evidence group skill. Runs direct end-user interviews to saturation.
-  Gates on access — halts if discovery-context says user_access is none
-  or proxy-only. Captures past behavior, not hypotheticals. Produces one
-  note file per participant + saturation log.
+  Warns (does not halt) if discovery-context says user_access is none or
+  proxy-only — recommends sme-workshops / support-data-analysis /
+  secondary-research instead, but allows override. Captures past
+  behavior, not hypotheticals. Produces one note file per participant +
+  saturation log.
 group: evidence
 produces: interview-notes/p<NN>-*.md, _saturation-log.md
 consumes: discovery-context.md, interview-guide.md (if exists)
@@ -15,18 +17,35 @@ origin: ECC
 
 Direct user interviews. Run only when `user_access` allows it.
 
-## Step 1 — Read discovery context
+## Step 1 — Read discovery context (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing (run `profile-builder`).
+Try to read `discovery-context.md`.
 
-Pull section **4. Access & Data**.
+**If present:** Pull section **4. Access & Data**.
 
-**Access gate:**
-- `direct` or `client-mediated` → proceed
-- `proxy-only` → tell user: "discovery-context says no end-user access. Use `sme-workshops`, `support-data-analysis`, or `secondary-research` instead. Halting."
-- `none` → same as above
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Three options:
+> 1. Run `profile-builder` first (recommended)
+> 2. Bootstrap inline — confirm 1 thing: end-user access is direct / client-mediated / proxy-only / none?
+> 3. Proceed assuming direct access — I'll tag any access-related note as `[ASSUMED]`"
+>
+> Which?"
 
-If guide exists at `./discovery/interview-guide.md`, use it. If not, recommend running `research-planning` first to build one.
+Default to option 2. Never block.
+
+**Access reality-check (warn + confirm, do not halt):**
+
+If access is `proxy-only` or `none`, tell the BA:
+> "⚠ Reality check: your context says `user_access: <value>`. Direct interviews typically aren't reachable in that case. Recommended alternatives: `sme-workshops`, `support-data-analysis`, `secondary-research`. Three choices:
+> 1. Switch to one of those skills (recommended)
+> 2. Proceed anyway — you have an override path (e.g. friendly contact, recruiting independently). I'll tag every note with `[NO-ACCESS-OVERRIDE]` and add a banner to `_saturation-log.md` explaining the deviation
+> 3. Update `discovery-context.md` first to reflect the new access reality, then re-run"
+>
+> Which?"
+
+Never auto-halt. If the BA picks option 2, proceed and ensure the `[NO-ACCESS-OVERRIDE]` tag appears in every note file plus a banner at the top of `_saturation-log.md`: "⚠ Run with insufficient access — outputs are speculative."
+
+If guide exists at `./discovery/interview-guide.md`, use it. If not, recommend running `research-planning` first to build one (offer to bootstrap a 4–5 question generic guide inline as a fallback).
 
 ## Step 2 — Per-interview prep (15 min)
 

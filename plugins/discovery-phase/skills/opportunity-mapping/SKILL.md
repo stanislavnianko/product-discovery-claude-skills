@@ -16,13 +16,35 @@ origin: ECC
 
 Turns the top pain points into opportunities and forces multiple candidate solutions before the team locks in. Two modes depending on whether the client already proposed a solution.
 
-## Step 1 — Read discovery context + insights
+## Step 1 — Read discovery context + insights (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing.
+Try to read `discovery-context.md`.
 
-Pull **2. Product / Initiative → Solution already proposed by client**. This drives mode selection.
+**If present:** Pull **2. Product / Initiative → Solution already proposed by client**. This drives mode selection.
 
-Read `insight-matrix.md`. Halt if missing — without ranked insights, the tree has no anchor.
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Three options:
+> 1. Run `profile-builder` first (recommended)
+> 2. Bootstrap inline — I'll ask 1 question: did the client propose a specific solution, or are we generating cold? (this picks Generate-mode vs Validate-mode)
+> 3. Proceed in Generate-mode and tag the tree as `[ASSUMED]`"
+>
+> Which?"
+
+Default to option 2. Never block.
+
+Try to read `insight-matrix.md`.
+
+**If present:** Anchor the tree against the ranked insights.
+
+**If missing:** Tell the BA:
+> "Heads-up: `insight-matrix.md` is missing. Without ranked insights the tree won't have an evidence anchor. Three options:
+> 1. Run `insight-synthesis` first (recommended for high-stakes work)
+> 2. Bootstrap inline — name the top 1–3 pains in one sentence each (fast, lower fidelity — these become the tree's roots, but with no source-weighting)
+> 3. Proceed without anchored pains — I'll work from your hypothesis or the client's proposed solution, every leaf tagged `[NO-EVIDENCE-ANCHOR]`"
+>
+> Which?"
+
+Default to option 2. Never block.
 
 ## Step 2 — Pick mode
 

@@ -16,13 +16,23 @@ origin: ECC
 
 The skill that decides **how** the BA will learn — informed by access reality, not aspiration. In outsourcing, this almost always means a mix of methods, not pure interviews.
 
-## Step 1 — Read discovery context
+## Step 1 — Read discovery context (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing (run `profile-builder`).
+Try to read `discovery-context.md`.
 
-Pull section **4. Access & Data**. This drives the entire plan.
+**If present:** Pull section **4. Access & Data**. This drives the entire plan.
 
-Read `problem-canvas.md`. If absent, recommend running `problem-framing` first — research without a hypothesis is a fishing expedition.
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Access level drives the entire research plan, so this matters more here than elsewhere. Three options:
+> 1. Run `profile-builder` now (recommended)
+> 2. Bootstrap inline — I'll ask 2 questions: (a) end-user access (direct / client-mediated / proxy-only / none), (b) which proxy data sources are available (SMEs / support tickets / analytics / none) (fast)
+> 3. Proceed and recommend a generic mixed-methods plan, tagged `[ASSUMED ACCESS]`"
+>
+> Which?"
+
+Default to option 2. Never block.
+
+Read `problem-canvas.md`. If absent, recommend running `problem-framing` first — research without a hypothesis is a fishing expedition. The BA can override and proceed; in that case tag the plan's research questions as `[NO-HYPOTHESIS]` so reviewers see the limitation.
 
 ## Step 2 — Match access level → method mix
 

@@ -16,11 +16,22 @@ origin: ECC
 
 Pull from published sources when primary research is constrained or unavailable. Standard tool for pre-sale discovery (no time/budget for primary), regulated domains (interview restrictions), and analogous-domain framing.
 
-## Step 1 — Read discovery context
+## Step 1 — Read discovery context (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing.
+Try to read `discovery-context.md`.
 
-Pull **1. Client → Domain**, **6. Constraints**, **2. Product / Initiative**.
+**If present:** Pull **1. Client → Domain**, **6. Constraints**, **2. Product / Initiative**.
+
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Three options:
+> 1. Run `profile-builder` first (recommended)
+> 2. Bootstrap inline — I'll ask 2 questions: (a) client domain / sector, (b) any regulatory constraints (GDPR / HIPAA / SOC2 / none) (fast)
+> 3. Proceed with a generic industry scan, tagged `[ASSUMED DOMAIN]`"
+>
+> Which?"
+
+Default to option 2. Never block.
+
 Read `problem-canvas.md` if it exists.
 
 ## Step 2 — Decide research scope

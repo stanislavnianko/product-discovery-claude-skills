@@ -16,13 +16,35 @@ origin: ECC
 
 Agency-style estimation: effort by discipline × phase, with low / expected / high ranges, and a list of assumptions that, if violated, invalidate the estimate. The output is the heart of any commercial proposal.
 
-## Step 1 — Read context
+## Step 1 — Read context (recommended, not required)
 
-Read `discovery-context.md`. Halt if missing.
+Try to read `discovery-context.md`.
 
-Read `scope-doc.md`. Halt if missing — estimation without a defined scope is fiction.
+**If present:** Pull **1. Client → Stage** (greenfield vs migration changes effort), **3. Engagement → Mode** and **Budget context** (fixed-fee vs T&M shape estimation aggressiveness), **6. Constraints**.
 
-Pull from context: **1. Client → Stage** (greenfield vs migration changes effort), **3. Engagement → Mode** and **Budget context** (fixed-fee vs T&M shape estimation aggressiveness), **6. Constraints**.
+**If missing:** Tell the BA:
+> "Heads-up: `discovery-context.md` is missing. Three options:
+> 1. Run `profile-builder` first (recommended)
+> 2. Bootstrap inline — I'll ask 2 questions: (a) greenfield or migration, (b) fixed-fee or T&M (fast)
+> 3. Proceed assuming greenfield + fixed-fee, tagged `[ASSUMED ENGAGEMENT]`"
+>
+> Which?"
+
+Default to option 2. Never block.
+
+Try to read `scope-doc.md`.
+
+**If present:** Estimate against the defined scope.
+
+**If missing:** Tell the BA:
+> "Heads-up: `scope-doc.md` is missing. Estimation without a defined scope is fiction. Three options:
+> 1. Run `feature-scoping` first (recommended for any commercial use)
+> 2. Bootstrap inline — paste or dictate scope bullets (in/out per area). I'll work from those, but the estimate will inherit any vagueness in your bullets
+> 3. Proceed and produce a class-of-magnitude estimate (S / M / L / XL) with explicit `[NO-SCOPE]` tag — not for client use without a follow-up proper estimate"
+>
+> Which?"
+
+Default to option 2. Never block.
 
 ## Step 2 — Pick estimation method
 
@@ -117,4 +139,4 @@ Append to `_log.md`: `[estimation | <date>] method: <method>; total expected: <h
 - **Padding via vague "buffer".** Be specific: "+20% because new domain", not "+20% buffer".
 - **Estimating by hours when budget is in days.** Match the unit the client thinks in.
 - **Hiding contingency.** If risks are real, name them with their cost. Hidden buffers fund themselves with worse risks later.
-- **Estimating without a scope-doc.** Halt — go run `feature-scoping` first.
+- **Estimating without a scope-doc.** Strongly preferred to run `feature-scoping` first; if you proceed via inline bootstrap, the estimate inherits any vagueness in the bullets — keep it tagged DRAFT-ONLY until a real scope doc exists.
