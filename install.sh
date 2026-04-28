@@ -29,6 +29,7 @@ Examples:
   ./install.sh                              Install all 22 skills globally
   ./install.sh --group foundation           Just profile-builder + conductor
   ./install.sh --group evidence --project . Install evidence group into current dir
+  ./install.sh --force                      Re-install, overwrite existing folders
   ./install.sh --link --force               Dev mode: symlink, overwrite
 
 NOTE: For Claude Cowork / Code, the preferred path is the plugin marketplace:

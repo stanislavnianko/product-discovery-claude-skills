@@ -25,7 +25,7 @@ profile-builder  ──writes──▶  discovery-context.md
 | **Validation** | `feasibility-spike`, `prototype-plan` | Retire tech / product assumptions before build. |
 | **Deliverables** | `proposal`, `sow-draft`, `discovery-handoff`, `go-nogo-memo` | Commercial + decisional outputs for the client and the receiving team. |
 
-Full skill list with one-liners: see [`docs/skills.md`](#) (TODO) or run `./scripts/validate-skills.sh` to enumerate.
+Full skill list: see the [skill groups table above](#skill-groups) or run `./scripts/validate-skills.sh` to enumerate.
 
 ## Why outsourcing-first?
 
@@ -41,31 +41,42 @@ This pack defaults to that reality. For internal product use, the same skills ap
 
 ## Install
 
-### Plugin marketplace (recommended for Claude Cowork / Code)
+### Recommended: Claude Desktop or claude.ai (web)
+
+Designed for non-technical users (BAs, PMs, consultants). No git, no terminal.
+
+1. **Download the bundle.** Open the [latest release][rel] and download `discovery-phase-all.zip` (all 22 skills) — or grab individual `<skill>.zip` files if you only need a few.
+2. **Unzip** `discovery-phase-all.zip`. You'll get a `skills/` folder with 22 individual `<skill>.zip` files inside. **Do not unzip those inner files** — claude.ai expects each skill as a single zip.
+3. **Open Claude → Settings → Capabilities → Skills → Upload skill.** Same path in Claude Desktop and claude.ai web.
+4. **Upload `profile-builder.zip` first** — it's the foundation every other skill reads. Then upload the other skills you need.
+
+> Tip: every skill checks for `discovery-context.md` in your project and halts if missing. Always run `profile-builder` first in any new engagement.
+
+[rel]: https://github.com/stanislavnianko/product-discovery-claude-skills/releases/latest
+
+### Advanced: Claude Code `/plugin` (CLI / IDE)
 
 ```
 /plugin marketplace add https://github.com/stanislavnianko/product-discovery-claude-skills
-/plugin install discovery-phase
+/plugin install discovery-phase@claude-skills
 ```
 
-Skills appear namespaced as `discovery-phase:profile-builder`, `discovery-phase:problem-framing`, etc.
+The `@claude-skills` suffix is the marketplace name from `.claude-plugin/marketplace.json` — without it Claude Code can't locate the plugin. Skills appear namespaced as `discovery-phase:profile-builder`, etc.
 
-### Filesystem install (Codex CLI / CI / fallback)
+### Advanced: filesystem install (CI / fallback)
 
 ```bash
 git clone https://github.com/stanislavnianko/product-discovery-claude-skills.git
 cd product-discovery-claude-skills
 ./install.sh                            # all 22 skills → ~/.claude/skills/
 ./install.sh --group foundation         # just foundation skills
-./install.sh --group discovery          # just discovery group
 ./install.sh --project ~/myclient       # install into project scope
+./install.sh --force                    # overwrite existing (re-install)
 ./install.sh --link --force             # dev mode: symlink, overwrite
 ./install.sh --dry-run                  # preview without writing
 ```
 
-### claude.ai Projects
-
-Upload individual skill folders via Settings → Skills. Always upload `profile-builder` first; it's the foundation every other skill depends on.
+`./install.sh` without `--force` skips folders that already exist — pass `--force` to overwrite when re-installing.
 
 ## Using the pack
 
