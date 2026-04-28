@@ -1,11 +1,12 @@
 ---
 name: prototype-plan
+pack: discovery-phase
 description: >-
-  Validation group skill. Plans a runnable prototype that retires the
-  top assumptions in a realistic environment. Differs from MVP by being
-  internally-scoped (limited audience, throwaway by default). Includes
-  demo script. Produces poc-plan.md and a runnable skeleton scaffold.
-  Reads discovery-context.md.
+  [discovery-phase pack · validation] Plans a runnable prototype that
+  retires the top assumptions in a realistic environment. Differs from
+  MVP by being internally-scoped (limited audience, throwaway by default).
+  Includes demo script. Produces poc-plan.md and a runnable skeleton
+  scaffold. Reads discovery-context.md.
 group: validation
 produces: poc-plan.md, ./discovery/poc/ (runnable skeleton)
 consumes: discovery-context.md, scope-doc.md, risk-assumption-map.md, tech-spike-report.md (optional)
@@ -14,60 +15,27 @@ origin: ECC
 
 # Prototype Plan
 
+> Part of the **discovery-phase** skill pack · `validation` group · reads `discovery-context.md` (run `profile-builder` first if missing).
+
 A prototype proves user/product assumptions in a realistic environment. Built minimally, demoed deliberately, torn down by contract.
 
-## Step 1 — Read context (recommended, not required)
+## Step 1 — Read context
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` (section **3. Engagement** — mode + budget drive prototype ambition), `scope-doc.md` (prototype is a slice of MVP scope), `risk-assumption-map.md` (top-3 assumptions), and optionally `tech-spike-report.md`.
 
-**If present:** Pull **3. Engagement** (mode + budget context drive prototype ambition).
+If `discovery-context.md` is missing, ask the BA inline: "who's running the prototype build — solo BA / BA + engineer / engineering lead?" — tag `[ASSUMED]`. If `scope-doc.md` is missing, proceed tagged `[NO-SCOPE-DOC]`. If `risk-assumption-map.md` is missing, ask for 1–3 assumptions inline or proceed tagged `[NO-RISK-FRAME]`. Never block; recommend `profile-builder` / `feature-scoping` / `risk-assumption-mapping` for high-stakes work.
 
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. Three options:
-> 1. Run `profile-builder` first (recommended)
-> 2. Bootstrap inline — I'll ask 1 question: who's running the prototype build (solo BA / BA + engineer / engineering lead)?
-> 3. Proceed assuming engineering capacity is available, tagged `[ASSUMED]`"
->
-> Which?"
+**Reality checks (warn + confirm, do not halt):**
+- If `tech-spike-report.md` says feasibility is **Red**, warn that the prototype will test politics, not tech. Offer: resolve the blocker first (re-spike / re-scope / pivot via `opportunity-mapping`), defer to delivery, or proceed with a `⚠ RED-FEASIBILITY-OVERRIDE` banner and aggressive tear-down plan.
+- If context shows **no engineering capacity**, warn that the plan will be conceptual rather than runnable. Offer: loop in an engineer, defer to delivery, switch to `feasibility-spike` (smaller), or proceed solo with a `⚠ NO-ENGINEER-OVERRIDE` banner — Step 7 (runnable skeleton) will be skipped or stubbed.
 
-Default to option 2. Never block.
-
-Try to read `scope-doc.md` — prototype is a slice of MVP scope. If missing, recommend `feature-scoping` first or proceed with scope tagged `[NO-SCOPE-DOC]`.
-
-Try to read `risk-assumption-map.md` for the top-3 assumptions. If missing, ask BA to name 1–3 assumptions inline or proceed tagged `[NO-RISK-FRAME]`.
-
-Try to read `tech-spike-report.md` if it exists.
-
-**If feasibility was Red:** Tell the BA:
-> "⚠ Reality check: `tech-spike-report.md` says feasibility is Red. Building a prototype on Red feasibility means the prototype tests politics, not tech. Three options:
-> 1. Resolve the feasibility blocker first (re-spike, re-scope, or pivot via `opportunity-mapping`) — recommended
-> 2. Defer to post-contract / delivery phase
-> 3. Proceed anyway — output gets a `⚠ RED-FEASIBILITY-OVERRIDE` banner; tear-down plan must be aggressive"
->
-> Which?"
-
-Never auto-halt.
-
-## Step 2 — Engineering capacity reality-check (warn + confirm, do not halt)
-
-Same pattern as `feasibility-spike`: if context shows no engineering capacity, tell the BA:
-> "⚠ Reality check: this skill assumes engineering capacity. Without an engineer, the prototype plan will be conceptual rather than runnable. Four choices:
-> 1. Loop in an engineer (recommended)
-> 2. Defer to post-contract / delivery phase
-> 3. Switch to `feasibility-spike` (smaller, may be doable solo)
-> 4. Proceed solo anyway — `poc-plan.md` will get a `⚠ NO-ENGINEER-OVERRIDE` banner and the runnable skeleton step (Step 8) will be skipped or stubbed"
->
-> Which?"
-
-Never auto-halt.
-
-## Step 3 — State the prototype objective
+## Step 2 — State the prototype objective
 
 One sentence. End-to-end happy path.
 
 > "The prototype lets a single SMB admin import a CSV, see preview, and confirm — in one session, on real data."
 
-## Step 4 — Pre-committed success criteria
+## Step 3 — Pre-committed success criteria
 
 Before any code:
 
@@ -77,7 +45,7 @@ Before any code:
 
 Without pre-commit, the team will declare success regardless.
 
-## Step 5 — Cut scope (delta vs scope-doc)
+## Step 4 — Cut scope (delta vs scope-doc)
 
 The prototype is narrower than the MVP scope. Build a scope delta table:
 
@@ -86,7 +54,7 @@ The prototype is narrower than the MVP scope. Build a scope delta table:
 
 Cut MORE aggressively than feels comfortable. Polished UI, edge errors, scale, integrations — all default OUT for prototype.
 
-## Step 6 — Architecture sketch
+## Step 5 — Architecture sketch
 
 10-minute ASCII or mermaid. Identify:
 
@@ -94,7 +62,7 @@ Cut MORE aggressively than feels comfortable. Polished UI, edge errors, scale, i
 - External dependencies
 - Happy-path data flow
 
-## Step 7 — Generate construction plan
+## Step 6 — Generate construction plan
 
 If the prototype is ≥3 build steps:
 
@@ -102,7 +70,7 @@ If the prototype is ≥3 build steps:
 
 If <3 steps, list inline.
 
-## Step 8 — Scaffold runnable skeleton
+## Step 7 — Scaffold runnable skeleton
 
 Create `./discovery/poc/` containing:
 
@@ -113,13 +81,13 @@ Create `./discovery/poc/` containing:
 
 Skeleton means **plumbing works**: dev can `npm run dev` / `uv run` and see the frame. Business logic comes in later steps.
 
-## Step 9 — Demo script
+## Step 8 — Demo script
 
 Exactly what the BA / PM clicks, types, shows during the demo. Step by step. This becomes the phase-end exhibit consumed by `go-nogo-memo` / `proposal` / `discovery-handoff`.
 
 Per step: action → expected result → the assumption it retires.
 
-## Step 10 — Tear-down plan
+## Step 9 — Tear-down plan
 
 Pre-commit:
 
@@ -133,7 +101,7 @@ A prototype with no tear-down plan becomes accidental production via inertia.
 - `./discovery/poc-plan.md` per `./template.md`
 - `./discovery/poc/` runnable skeleton
 
-Append to `_log.md`: `[prototype-plan | <date>] objective: <one-line>; success criteria: <list>; build steps: <count>; demo script ready: <yes/no>`.
+Append to `_log.md`: `[prototype-plan | YYYY-MM-DD] objective: <one-line>; success_criteria: <list>; build_steps: <count>; demo_ready: <yes/no>`.
 
 ## Anti-patterns
 

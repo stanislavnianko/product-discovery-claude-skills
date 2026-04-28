@@ -1,8 +1,9 @@
 ---
 name: competitive-scan
+pack: discovery-phase
 description: >-
-  Evidence group skill. Maps direct competitors, indirect substitutes,
-  and adjacent (non-software) workarounds for the problem in
+  [discovery-phase pack · evidence] Maps direct competitors, indirect
+  substitutes, and adjacent (non-software) workarounds for the problem in
   problem-canvas.md. Identifies the actual gap and any "free incumbent"
   the client can't outcompete. Produces competitive-scan.md. Reads
   discovery-context.md.
@@ -14,35 +15,15 @@ origin: ECC
 
 # Competitive Scan
 
+> Part of the **discovery-phase** skill pack · `evidence` group · reads `discovery-context.md` (run `profile-builder` first if missing).
+
 Answers two questions: **what's already out there**, and **why haven't users adopted it for this problem?** The second is more important.
 
-## Step 1 — Read inputs (recommended, not required)
+## Step 1 — Read inputs
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` (sections **1. Client → Domain**, **2. Product / Initiative**) and `problem-canvas.md` (anchors the scan against the framed problem).
 
-**If present:** Pull **1. Client → Domain**, **2. Product / Initiative**.
-
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. Three options:
-> 1. Run `profile-builder` first (recommended)
-> 2. Bootstrap inline — I'll ask 1 question: client domain + product type in one line (fast)
-> 3. Proceed with whatever domain you give me right now, tagged `[ASSUMED DOMAIN]`"
->
-> Which?"
-
-Try to read `problem-canvas.md`.
-
-**If present:** Anchor the scan against the framed problem.
-
-**If missing:** Tell the BA:
-> "Heads-up: `problem-canvas.md` is missing. Without a framed problem the scan tends to drift into general-purpose competitor mapping. Three options:
-> 1. Run `problem-framing` first (recommended)
-> 2. Bootstrap inline — I'll ask 2 questions: (a) what problem in one line, (b) what success signal would matter (fast, lower fidelity)
-> 3. Proceed without a problem frame — the scan will be a general competitor list, tagged `[NO-PROBLEM-FRAME]` so reviewers know the gap analysis is weak"
->
-> Which?"
-
-Default to option 2 in both cases. Never block.
+If `discovery-context.md` is missing, ask the BA inline: "client domain + product type in one line" — tag the output `[ASSUMED DOMAIN]`. If `problem-canvas.md` is missing, ask: "what problem in one line; what success signal would matter?" — tag the output `[NO-PROBLEM-FRAME]` so reviewers know the gap analysis is weak. Never block; recommend `profile-builder` / `problem-framing` for high-stakes work.
 
 ## Step 2 — List competitive set in 3 layers
 
@@ -94,7 +75,7 @@ Strategic fit is judged from the **client's** perspective, not the agency's. The
 
 `./discovery/competitive-scan.md` per `./template.md`.
 
-Append to `_log.md`: `[competitive-scan | <date>] direct: <N>; indirect: <N>; adjacent: <N>; gap headline: <one-line>; substitute risk: <high/med/low>`.
+Append to `_log.md`: `[competitive-scan | YYYY-MM-DD] direct: <N>; indirect: <N>; adjacent: <N>; gap: <one-line>; substitute_risk: <high/med/low>`.
 
 ## Anti-patterns
 

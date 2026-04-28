@@ -1,11 +1,12 @@
 ---
 name: secondary-research
+pack: discovery-phase
 description: >-
-  Evidence group skill. Synthesizes published industry reports,
-  benchmarks, regulatory filings, academic research, and analogous-domain
-  case studies to substitute or augment direct evidence. Especially for
-  engagements where user_access is none. Produces secondary-research.md.
-  Reads discovery-context.md.
+  [discovery-phase pack · evidence] Synthesizes published industry
+  reports, benchmarks, regulatory filings, academic research, and
+  analogous-domain case studies to substitute or augment direct evidence.
+  Especially for engagements where user_access is none. Produces
+  secondary-research.md. Reads discovery-context.md.
 group: evidence
 produces: secondary-research.md
 consumes: discovery-context.md, problem-canvas.md (optional)
@@ -14,25 +15,15 @@ origin: ECC
 
 # Secondary Research
 
+> Part of the **discovery-phase** skill pack · `evidence` group · reads `discovery-context.md` (run `profile-builder` first if missing).
+
 Pull from published sources when primary research is constrained or unavailable. Standard tool for pre-sale discovery (no time/budget for primary), regulated domains (interview restrictions), and analogous-domain framing.
 
-## Step 1 — Read discovery context (recommended, not required)
+## Step 1 — Read discovery context
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` (sections **1. Client → Domain**, **2. Product / Initiative**, **6. Constraints**) and `problem-canvas.md` if it exists.
 
-**If present:** Pull **1. Client → Domain**, **6. Constraints**, **2. Product / Initiative**.
-
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. Three options:
-> 1. Run `profile-builder` first (recommended)
-> 2. Bootstrap inline — I'll ask 2 questions: (a) client domain / sector, (b) any regulatory constraints (GDPR / HIPAA / SOC2 / none) (fast)
-> 3. Proceed with a generic industry scan, tagged `[ASSUMED DOMAIN]`"
->
-> Which?"
-
-Default to option 2. Never block.
-
-Read `problem-canvas.md` if it exists.
+If `discovery-context.md` is missing, ask the BA inline: "(a) client domain / sector; (b) any regulatory constraints (GDPR / HIPAA / SOC2 / none)?" — tag the output `[ASSUMED DOMAIN]`. Never block; recommend `profile-builder` for high-stakes work.
 
 ## Step 2 — Decide research scope
 
@@ -77,7 +68,7 @@ If using analogous domain (e.g., "no data on healthcare CRM, borrowing from fina
 
 `./discovery/secondary-research.md` per `./template.md`.
 
-Append to `_log.md`: `[secondary-research | <date>] scopes: <list>; sources: <count>; supports/contradicts/orthogonal: <X/Y/Z>`.
+Append to `_log.md`: `[secondary-research | YYYY-MM-DD] scopes: <list>; sources: <count>; supports: <N>; contradicts: <N>; orthogonal: <N>`.
 
 ## Anti-patterns
 

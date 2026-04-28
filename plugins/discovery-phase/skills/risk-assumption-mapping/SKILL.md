@@ -1,7 +1,8 @@
 ---
 name: risk-assumption-mapping
+pack: discovery-phase
 description: >-
-  Synthesis group skill. Surfaces implicit assumptions across
+  [discovery-phase pack · synthesis] Surfaces implicit assumptions across
   desirability, viability, feasibility, usability, and ethical/legal
   axes. Ranks by impact-if-wrong × evidence-today. Names top 3 to retire
   before scoping. In outsourcing, also distinguishes client-owned vs
@@ -14,37 +15,15 @@ origin: ECC
 
 # Risk & Assumption Mapping
 
+> Part of the **discovery-phase** skill pack · `synthesis` group · reads `discovery-context.md` (run `profile-builder` first if missing).
+
 Every chosen solution rides on unstated assumptions. This skill makes them visible. In outsourcing, also clarifies **whose** risk each one is — agency / client / shared — because this drives proposal language and SoW structure.
 
-## Step 1 — Read context (recommended, not required)
+## Step 1 — Read context
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` (sections **3. Engagement**, **6. Constraints** — shape what counts as a risk) and `opportunity-tree.md` (anchors risks to a solution direction).
 
-**If present:** Pull **3. Engagement** and **6. Constraints** — they shape what counts as a risk.
-
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. Three options:
-> 1. Run `profile-builder` first (recommended)
-> 2. Bootstrap inline — I'll ask 2 questions: (a) engagement mode (pre-sale / paid discovery / delivery / staff aug), (b) any regulatory or ethical constraints (GDPR / HIPAA / SOC2 / accessibility floor / none) (fast)
-> 3. Proceed without engagement framing — risks won't be split client/agency/shared, just listed flat, tagged `[NO-OWNERSHIP]`"
->
-> Which?"
-
-Default to option 2. Never block.
-
-Try to read `opportunity-tree.md`.
-
-**If present:** Frame risks against the chosen solution direction.
-
-**If missing:** Tell the BA:
-> "Heads-up: `opportunity-tree.md` is missing. Risks need a solution direction to be framed against. Three options:
-> 1. Run `opportunity-mapping` first (recommended)
-> 2. Bootstrap inline — answer 1 question: what solution direction are we evaluating, in one line? (fast)
-> 3. Proceed and brainstorm risks against the problem (rather than a specific solution), tagged `[NO-SOLUTION-FRAME]`"
->
-> Which?"
-
-Default to option 2. Never block.
+If `discovery-context.md` is missing, ask the BA inline: "(a) engagement mode (pre-sale / paid discovery / delivery / staff aug); (b) any regulatory or ethical constraints (GDPR / HIPAA / SOC2 / accessibility floor / none)?" — or proceed tagged `[NO-OWNERSHIP]` (risks listed flat, not split client/agency/shared). If `opportunity-tree.md` is missing, ask: "what solution direction are we evaluating, in one line?" — or brainstorm risks against the problem and tag `[NO-SOLUTION-FRAME]`. Never block; recommend `profile-builder` / `opportunity-mapping` for high-stakes work.
 
 ## Step 2 — Brainstorm by 5 axes
 
@@ -107,7 +86,7 @@ This becomes the input to `proposal` and `sow-draft` risk sections.
 
 `./discovery/risk-assumption-map.md` per `./template.md`.
 
-Append to `_log.md`: `[risk-assumption-mapping | <date>] axes covered: 5; total: <N>; client-owned: <N>; agency-owned: <N>; shared: <N>; top-3 leverage: <list>`.
+Append to `_log.md`: `[risk-assumption-mapping | YYYY-MM-DD] axes: 5; total: <N>; client_owned: <N>; agency_owned: <N>; shared: <N>; top3: <list>`.
 
 ## Anti-patterns
 

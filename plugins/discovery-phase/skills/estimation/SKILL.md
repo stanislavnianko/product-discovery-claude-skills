@@ -1,10 +1,11 @@
 ---
 name: estimation
+pack: discovery-phase
 description: >-
-  Scoping group skill. Translates a defined scope into an effort estimate
-  broken down by discipline (Dev / QA / BA / PM / Design) × phase, with
-  confidence intervals and explicit assumptions. Designed to feed
-  proposal and sow-draft. Produces estimation.md. Reads
+  [discovery-phase pack · scoping] Translates a defined scope into an
+  effort estimate broken down by discipline (Dev / QA / BA / PM / Design)
+  × phase, with confidence intervals and explicit assumptions. Designed
+  to feed proposal and sow-draft. Produces estimation.md. Reads
   discovery-context.md and scope-doc.md.
 group: scoping
 produces: estimation.md
@@ -14,37 +15,15 @@ origin: ECC
 
 # Estimation
 
+> Part of the **discovery-phase** skill pack · `scoping` group · reads `discovery-context.md` (run `profile-builder` first if missing).
+
 Agency-style estimation: effort by discipline × phase, with low / expected / high ranges, and a list of assumptions that, if violated, invalidate the estimate. The output is the heart of any commercial proposal.
 
-## Step 1 — Read context (recommended, not required)
+## Step 1 — Read context
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` (sections **1. Client → Stage**, **3. Engagement → Mode** and **Budget context**, **6. Constraints**) and `scope-doc.md`.
 
-**If present:** Pull **1. Client → Stage** (greenfield vs migration changes effort), **3. Engagement → Mode** and **Budget context** (fixed-fee vs T&M shape estimation aggressiveness), **6. Constraints**.
-
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. Three options:
-> 1. Run `profile-builder` first (recommended)
-> 2. Bootstrap inline — I'll ask 2 questions: (a) greenfield or migration, (b) fixed-fee or T&M (fast)
-> 3. Proceed assuming greenfield + fixed-fee, tagged `[ASSUMED ENGAGEMENT]`"
->
-> Which?"
-
-Default to option 2. Never block.
-
-Try to read `scope-doc.md`.
-
-**If present:** Estimate against the defined scope.
-
-**If missing:** Tell the BA:
-> "Heads-up: `scope-doc.md` is missing. Estimation without a defined scope is fiction. Three options:
-> 1. Run `feature-scoping` first (recommended for any commercial use)
-> 2. Bootstrap inline — paste or dictate scope bullets (in/out per area). I'll work from those, but the estimate will inherit any vagueness in your bullets
-> 3. Proceed and produce a class-of-magnitude estimate (S / M / L / XL) with explicit `[NO-SCOPE]` tag — not for client use without a follow-up proper estimate"
->
-> Which?"
-
-Default to option 2. Never block.
+If `discovery-context.md` is missing, ask the BA inline: "(a) greenfield or migration; (b) fixed-fee or T&M?" — tag the output `[ASSUMED ENGAGEMENT]`. If `scope-doc.md` is missing, ask for in/out scope bullets per area, or fall back to a class-of-magnitude estimate (S / M / L / XL) tagged `[NO-SCOPE]` — not for client use without a follow-up proper estimate. Never block; recommend `profile-builder` / `feature-scoping` for high-stakes work.
 
 ## Step 2 — Pick estimation method
 
@@ -130,7 +109,7 @@ Format the output so `proposal` can pull headline numbers + assumption list verb
 
 `./discovery/estimation.md` per `./template.md`.
 
-Append to `_log.md`: `[estimation | <date>] method: <method>; total expected: <hours/days>; confidence multiplier: <Xx>; contingency: <Y%>`.
+Append to `_log.md`: `[estimation | YYYY-MM-DD] method: <method>; total: <hours/days>; multiplier: <Xx>; contingency: <Y%>`.
 
 ## Anti-patterns
 

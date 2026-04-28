@@ -1,11 +1,12 @@
 ---
 name: feature-scoping
+pack: discovery-phase
 description: >-
-  Scoping group skill. Translates the chosen solution direction and top
-  risks into a tight, build-able scope with explicit in/out boundaries
-  per area. Designed to be reusable as a chunk of a proposal or SoW.
-  Produces scope-doc.md. Reads discovery-context.md, opportunity-tree.md,
-  and risk-assumption-map.md.
+  [discovery-phase pack · scoping] Translates the chosen solution direction
+  and top risks into a tight, build-able scope with explicit in/out
+  boundaries per area. Designed to be reusable as a chunk of a proposal or
+  SoW. Produces scope-doc.md. Reads discovery-context.md,
+  opportunity-tree.md, and risk-assumption-map.md.
 group: scoping
 produces: scope-doc.md
 consumes: discovery-context.md, opportunity-tree.md, risk-assumption-map.md
@@ -14,31 +15,15 @@ origin: ECC
 
 # Feature Scoping
 
+> Part of the **discovery-phase** skill pack · `scoping` group · reads `discovery-context.md` (run `profile-builder` first if missing).
+
 The boundary-drawing skill. Output is a scope doc precise enough that engineering can estimate it and the client can sign off on it. Built to be paste-able into a proposal or SoW (commercial documents) with minimal rework.
 
-## Step 1 — Read context (recommended, not required)
+## Step 1 — Read context
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` (sections **3. Engagement**, **5. Expected deliverable**, **6. Constraints**), `opportunity-tree.md` (solution direction), and `risk-assumption-map.md` (top assumptions to retire).
 
-**If present:** Pull **3. Engagement** (timeline + budget context shape what's realistic), **5. Expected deliverable** (drives output framing), **6. Constraints**.
-
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. Three options:
-> 1. Run `profile-builder` first (recommended)
-> 2. Bootstrap inline — I'll ask 2 questions: (a) timeline + budget shape (days / weeks / month / quarter), (b) any hard constraints (NDA / regulatory / tech-stack lock-in) (fast)
-> 3. Proceed assuming a generic 4-week paid-discovery shape, tagged `[ASSUMED ENGAGEMENT]`"
->
-> Which?"
-
-Default to option 2. Never block.
-
-Try to read `opportunity-tree.md`. If missing, tell the BA:
-> "`opportunity-tree.md` missing. Three options: (1) run `opportunity-mapping` first (recommended), (2) tell me the solution direction in one line so I can scope against it, (3) proceed without solution framing — scope will be tagged `[NO-SOLUTION-DIRECTION]` and likely too generic to estimate cleanly."
-
-Try to read `risk-assumption-map.md`. If missing, tell the BA:
-> "`risk-assumption-map.md` missing. Scope-without-risk-context is fragile. Three options: (1) run `risk-assumption-mapping` first (recommended), (2) name 1–3 top assumptions to retire inline, (3) proceed without — scope will be feature-driven rather than assumption-driven and tagged `[NO-RISK-FRAME]`."
-
-Default to option 2 in both cases. Never block.
+If `discovery-context.md` is missing, ask the BA inline: "(a) timeline + budget shape (days / weeks / month / quarter); (b) any hard constraints (NDA / regulatory / tech-stack lock-in)?" — tag the output `[ASSUMED ENGAGEMENT]`. If `opportunity-tree.md` is missing, ask for solution direction in one line, or proceed tagged `[NO-SOLUTION-DIRECTION]`. If `risk-assumption-map.md` is missing, ask for 1–3 top assumptions to retire, or proceed tagged `[NO-RISK-FRAME]`. Never block; recommend `profile-builder` / `opportunity-mapping` / `risk-assumption-mapping` for high-stakes work.
 
 ## Step 2 — State the MVP job
 
@@ -107,7 +92,7 @@ These flow directly into the proposal "what we need from you" / "our dependencie
 
 `./discovery/scope-doc.md` per `./template.md`. Designed to be reused — `proposal` and `sow-draft` skills will pull sections from here verbatim.
 
-Append to `_log.md`: `[feature-scoping | <date>] MVP job: <one-line>; t-shirt: <S/M/L>; deferred items: <count>; client assumptions: <count>`.
+Append to `_log.md`: `[feature-scoping | YYYY-MM-DD] mvp_job: <one-line>; tshirt: <S/M/L>; deferred: <count>; client_assumptions: <count>`.
 
 ## Anti-patterns
 

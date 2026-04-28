@@ -1,11 +1,12 @@
 ---
 name: discovery-handoff
+pack: discovery-phase
 description: >-
-  Deliverables group skill. Hands discovery findings to a delivery team
-  (could be same agency squad in delivery phase, different agency, or
-  client internal team). Captures decisions made, open questions, risks
-  transferred, evidence chain. The "what we know vs what we don't"
-  document. Produces discovery-handoff.md.
+  [discovery-phase pack · deliverables] Hands discovery findings to a
+  delivery team (could be same agency squad in delivery phase, different
+  agency, or client internal team). Captures decisions made, open
+  questions, risks transferred, evidence chain. The "what we know vs what
+  we don't" document. Produces discovery-handoff.md.
 group: deliverables
 produces: discovery-handoff.md
 consumes: discovery-context.md, all upstream artifacts available
@@ -13,6 +14,8 @@ origin: ECC
 ---
 
 # Discovery Handoff
+
+> Part of the **discovery-phase** skill pack · `deliverables` group · reads `discovery-context.md` (run `profile-builder` first if missing).
 
 When discovery ends and delivery begins — possibly with a different team. This document is the bridge. Reading it cold should be enough to start delivery work.
 
@@ -25,23 +28,11 @@ When discovery ends and delivery begins — possibly with a different team. This
 
 Distinct from `proposal` (commercial) and `go-nogo-memo` (decision). Handoff is **operational**.
 
-## Step 1 — Read context + scan available artifacts (recommended, not required)
+## Step 1 — Read context + scan available artifacts
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md`. If missing, ask the BA inline: "who's the receiving team — same agency / different agency / client internal / mixed?" — tag the output `[ASSUMED RECEIVER]`. Never block; recommend `profile-builder` for high-stakes work.
 
-**If present:** Pull whatever's needed for handoff framing.
-
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. The handoff doc can still be written from whatever artifacts are on disk. Three options:
-> 1. Run `profile-builder` first (recommended)
-> 2. Bootstrap inline — I'll ask 1 question: who's the receiving team (same agency / different agency / client internal / mixed)?
-> 3. Proceed and infer from artifacts present, tagged `[ASSUMED RECEIVER]`"
->
-> Which?"
-
-Default to option 2. Never block.
-
-Scan `./discovery/` directory for what's actually present. Build an inventory at top of doc — this is critical: a handoff doc that overstates what's been discovered misleads the delivery team.
+Then scan the `./discovery/` directory for what's actually present. Build an inventory at top of doc — this is critical: a handoff doc that overstates what's been discovered misleads the delivery team.
 
 ## Step 2 — Identify the receiving team
 
@@ -117,7 +108,7 @@ If a live walkthrough is happening, suggest BA prepare:
 
 `./discovery/discovery-handoff.md` per `./template.md`. If receiving team prefers a wiki / Notion / Linear format, the BA exports/converts.
 
-Append to `_log.md`: `[discovery-handoff | <date>] receiving team: <name>; format: <doc/walkthrough>; open questions transferred: <count>`.
+Append to `_log.md`: `[discovery-handoff | YYYY-MM-DD] receiver: <name>; format: <doc/walkthrough>; open_questions: <count>`.
 
 ## Anti-patterns
 

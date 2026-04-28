@@ -1,11 +1,12 @@
 ---
 name: support-data-analysis
+pack: discovery-phase
 description: >-
-  Evidence group skill. Mines client's existing data — support tickets,
-  call recordings, chat logs, NPS verbatims, sales call transcripts,
-  product analytics — for unsolicited user signal. Faster and more
-  honest than interviews. Produces support-data-analysis.md. Reads
-  discovery-context.md.
+  [discovery-phase pack · evidence] Mines client's existing data —
+  support tickets, call recordings, chat logs, NPS verbatims, sales call
+  transcripts, product analytics — for unsolicited user signal. Faster
+  and more honest than interviews. Produces support-data-analysis.md.
+  Reads discovery-context.md.
 group: evidence
 produces: support-data-analysis.md
 consumes: discovery-context.md, problem-canvas.md (optional)
@@ -14,25 +15,15 @@ origin: ECC
 
 # Support Data Analysis
 
+> Part of the **discovery-phase** skill pack · `evidence` group · reads `discovery-context.md` (run `profile-builder` first if missing).
+
 The most underused evidence source in outsourcing discovery. Users complain in tickets, chats, and NPS comments without any selection bias from interview recruitment. The data already exists — just nobody read it systematically.
 
-## Step 1 — Read discovery context (recommended, not required)
+## Step 1 — Read discovery context
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` (sections **4. Access & Data → Data we can request**, **6. Constraints** — PII, regulatory). If no data sources are listed in section 4, ask the BA which data the client could share (tickets / NPS / chat / call recordings / analytics) and update the context file.
 
-**If present:** Pull **4. Access & Data → Data we can request**, **6. Constraints** (PII, regulatory).
-
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. Three options:
-> 1. Run `profile-builder` first (recommended)
-> 2. Bootstrap inline — I'll ask 2 questions: (a) which data sources are realistically available (tickets / NPS / chat / calls / analytics / none), (b) any regulatory constraints (HIPAA / GDPR / SOC2 / none) (fast)
-> 3. Proceed assuming standard tickets + NPS access, tagged `[ASSUMED ACCESS]`"
->
-> Which?"
-
-Default to option 2. Never block.
-
-If no data sources listed in section 4, ask BA: "What data does the client have that we could request access to? Tickets / NPS / chat / call recordings / analytics?" Then update the context file.
+If `discovery-context.md` is missing, ask the BA inline: "(a) which data sources are realistically available (tickets / NPS / chat / calls / analytics / none); (b) any regulatory constraints (HIPAA / GDPR / SOC2 / none)?" — tag the output `[ASSUMED ACCESS]`. Never block; recommend `profile-builder` for high-stakes work.
 
 ## Step 2 — Request data from client
 
@@ -89,7 +80,7 @@ If data is **silent** on a question: that's still a finding (push toward primary
 
 `./discovery/support-data-analysis.md` per `./template.md`.
 
-Append to `_log.md`: `[support-data-analysis | <date>] sources: <list>; volume: <count>; categories: <count>; canvas claims supported/contradicted/silent: <X/Y/Z>`.
+Append to `_log.md`: `[support-data-analysis | YYYY-MM-DD] sources: <list>; volume: <count>; categories: <count>; supports: <N>; contradicts: <N>; silent: <N>`.
 
 ## Anti-patterns
 

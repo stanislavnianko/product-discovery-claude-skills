@@ -1,11 +1,12 @@
 ---
 name: feasibility-spike
+pack: discovery-phase
 description: >-
-  Validation group skill. Time-boxed engineering investigation targeting
-  the top feasibility assumptions from risk-assumption-map. Produces
-  tech-spike-report.md and disposable code. Warns (does not halt) if no
-  engineering capacity is reflected in the engagement context — output
-  is tagged speculative if the BA chooses to proceed solo.
+  [discovery-phase pack · validation] Time-boxed engineering investigation
+  targeting the top feasibility assumptions from risk-assumption-map.
+  Produces tech-spike-report.md and disposable code. Warns (does not
+  halt) if no engineering capacity is reflected in the engagement context
+  — output is tagged speculative if the BA chooses to proceed solo.
 group: validation
 produces: tech-spike-report.md
 consumes: discovery-context.md, risk-assumption-map.md, scope-doc.md (optional)
@@ -14,50 +15,17 @@ origin: ECC
 
 # Feasibility Spike
 
+> Part of the **discovery-phase** skill pack · `validation` group · reads `discovery-context.md` (run `profile-builder` first if missing).
+
 Kill the biggest technical risks cheaply. Throwaway by contract.
 
-## Step 1 — Read context (recommended, not required)
+## Step 1 — Read context
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` (section **3. Engagement → Runner role**) and `risk-assumption-map.md` (anchors the spike to a specific assumption).
 
-**If present:** Pull **3. Engagement → Runner role**.
+If `discovery-context.md` is missing, ask the BA inline: "who's running the spike — solo BA / BA + engineer / engineering lead?" — tag the output `[ASSUMED ENGINEERING]`. If `risk-assumption-map.md` is missing, ask: "name 1–3 feasibility assumptions to test in one sentence each" or proceed as open exploration tagged `[EXPLORATION-NOT-SPIKE]`. Never block; recommend `profile-builder` / `risk-assumption-mapping` for high-stakes work.
 
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. Three options:
-> 1. Run `profile-builder` first (recommended)
-> 2. Bootstrap inline — I'll ask 1 question: who's running the spike (solo BA / BA + engineer / engineering lead)?
-> 3. Proceed assuming engineering capacity is available, tagged `[ASSUMED ENGINEERING]`"
->
-> Which?"
-
-Default to option 2. Never block.
-
-**Engineering capacity reality-check (warn + confirm, do not halt):**
-
-If runner is **solo BA** with no engineering support listed, tell the BA:
-> "⚠ Reality check: this skill assumes engineering capacity. Your context says runner is `<runner>`. Without an engineer the spike will produce a spike-shaped artifact with weak engineering signal. Four choices:
-> 1. Loop in an engineer (update context with their name) — recommended
-> 2. Defer the spike to post-contract / delivery phase
-> 3. Skip and accept the feasibility risk explicitly in the proposal
-> 4. Proceed solo anyway — output will get a `⚠ NO-ENGINEER-OVERRIDE` banner and findings tagged `[SPECULATIVE]`"
->
-> Which?"
-
-Never auto-halt. If the BA picks option 4, proceed and add the banner at the top of `tech-spike-report.md`.
-
-Try to read `risk-assumption-map.md`.
-
-**If present:** Anchor the spike to a specific assumption.
-
-**If missing:** Tell the BA:
-> "Heads-up: `risk-assumption-map.md` is missing. A spike without an assumption is exploration, not a spike. Three options:
-> 1. Run `risk-assumption-mapping` first (recommended)
-> 2. Bootstrap inline — name 1–3 feasibility assumptions to test in one sentence each (fast)
-> 3. Proceed as open exploration — output will be tagged `[EXPLORATION-NOT-SPIKE]` so reviewers know it's not assumption-driven"
->
-> Which?"
-
-Default to option 2. Never block.
+**Engineering capacity reality-check (warn + confirm, do not halt):** if runner is solo BA with no engineering support, warn that the spike will produce a spike-shaped artifact with weak engineering signal. Offer: loop in an engineer, defer the spike to delivery, skip and accept the risk in the proposal, or proceed solo with a `⚠ NO-ENGINEER-OVERRIDE` banner at the top of `tech-spike-report.md` and findings tagged `[SPECULATIVE]`.
 
 ## Step 2 — State spike goal
 
@@ -113,7 +81,7 @@ Commit spike code under `./discovery/spike/<topic>/`. Do **NOT** merge to produc
 - `./discovery/tech-spike-report.md` per `./template.md`
 - `./discovery/spike/<topic>/` — disposable code
 
-Append to `_log.md`: `[feasibility-spike | <date>] goal: <one-line>; box: <hours>; result: <green/yellow/red>; constraints: <list>`.
+Append to `_log.md`: `[feasibility-spike | YYYY-MM-DD] goal: <one-line>; box: <hours>; result: <green/yellow/red>; constraints: <list>`.
 
 ## Anti-patterns
 

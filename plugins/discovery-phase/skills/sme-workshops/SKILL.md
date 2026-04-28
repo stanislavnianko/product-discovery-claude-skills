@@ -1,9 +1,10 @@
 ---
 name: sme-workshops
+pack: discovery-phase
 description: >-
-  Evidence group skill. Structured workshop sessions with the client's
-  subject-matter experts when end users are unreachable. Captures their
-  view of user pain, current process, edge cases, and existing
+  [discovery-phase pack · evidence] Structured workshop sessions with the
+  client's subject-matter experts when end users are unreachable. Captures
+  their view of user pain, current process, edge cases, and existing
   workarounds — flagged as proxy evidence (lower weight than direct user
   data). Produces sme-notes/*.md.
 group: evidence
@@ -14,23 +15,15 @@ origin: ECC
 
 # SME Workshops
 
+> Part of the **discovery-phase** skill pack · `evidence` group · reads `discovery-context.md` (run `profile-builder` first if missing).
+
 Use when direct user access is blocked but the client has people who interact with the user daily — customer success, support, sales, ops, internal tool admins. Their view is **proxy** evidence: faster to access, lower fidelity than direct.
 
-## Step 1 — Read discovery context (recommended, not required)
+## Step 1 — Read discovery context
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` (sections **1. Client → Decision-makers**, **4. Access & Data → Client SMEs**). If no SMEs listed there, ask the BA to list them now and update the context file.
 
-**If present:** Pull **1. Client → Decision-makers**, **4. Access & Data → Client SMEs**. If no SMEs listed, ask BA to list them now (and update the context file).
-
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. Three options:
-> 1. Run `profile-builder` first (recommended)
-> 2. Bootstrap inline — I'll ask 1 question: which client SMEs are accessible (names + roles, or 'none yet') (fast)
-> 3. Proceed and ask SME-recruitment questions before workshop planning, tagged `[ASSUMED]`"
->
-> Which?"
-
-Default to option 2. Never block.
+If `discovery-context.md` is missing, ask the BA inline: "which client SMEs are accessible (names + roles, or 'none yet')?" — tag the output `[ASSUMED]`. Never block; recommend `profile-builder` for high-stakes work.
 
 ## Step 2 — Choose workshop format
 
@@ -80,7 +73,7 @@ After 2+ SME workshops, write `./discovery/sme-notes/_triangulation.md`:
 - `./discovery/sme-notes/<initials>-<role>.md` per SME
 - `./discovery/sme-notes/_triangulation.md` running
 
-Append to `_log.md`: `[sme-workshops | <date>] <SME initials>: <one-line>; confidence: <high/med/low>`.
+Append to `_log.md`: `[sme-workshops | YYYY-MM-DD] sme: <initials>; takeaway: <one-line>; confidence: <high/med/low>`.
 
 ## Anti-patterns
 

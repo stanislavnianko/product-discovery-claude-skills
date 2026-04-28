@@ -1,11 +1,12 @@
 ---
 name: sow-draft
+pack: discovery-phase
 description: >-
-  Deliverables group skill. Drafts a Statement of Work for legal/
-  procurement review post-proposal acceptance. Captures deliverables,
-  acceptance criteria, payment milestones, change-request process,
-  warranties, and termination clauses. NOT a substitute for legal review.
-  Produces sow-draft.md.
+  [discovery-phase pack · deliverables] Drafts a Statement of Work for
+  legal/procurement review post-proposal acceptance. Captures
+  deliverables, acceptance criteria, payment milestones, change-request
+  process, warranties, and termination clauses. NOT a substitute for
+  legal review. Produces sow-draft.md.
 group: deliverables
 produces: sow-draft.md
 consumes: discovery-context.md, scope-doc.md, estimation.md, proposal.md (recommended)
@@ -14,127 +15,40 @@ origin: ECC
 
 # SoW Draft
 
+> Part of the **discovery-phase** skill pack · `deliverables` group · reads `discovery-context.md` (run `profile-builder` first if missing).
+
 Statement of Work draft for the legal team to harden. The discovery team's job is to capture commercial reality precisely; legal then translates to enforceable terms.
 
 > **This skill produces a draft, not a contract.** Always route through agency legal + client legal before signing. The discovery team should not be the last line of defense on contract terms.
 
-## Step 1 — Read context + prerequisites (recommended, not required)
+## Step 1 — Read context + prerequisites
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` (sections **3. Engagement → Budget context** — drives payment structure; **6. Constraints** — regulatory clauses), `scope-doc.md` (deliverables + exclusions), and `estimation.md` (pricing structure). Recommended: `proposal.md` (consistency with what's already shared with client) and `risk-assumption-map.md` (informs warranty language).
 
-**If present:** Pull **3. Engagement → Budget context** (drives payment structure), **6. Constraints** (regulatory clauses).
+If `discovery-context.md` is missing, ask the BA inline: "(a) budget structure (fixed-fee / T&M / milestone-based); (b) regulatory constraints (GDPR / HIPAA / SOC2 / none)?" — tag the output `[ASSUMED COMMERCIAL]` and DRAFT-ONLY. If `scope-doc.md` or `estimation.md` is missing, ask for stand-in bullets, or proceed with `[TBD]` placeholders and a non-removable DRAFT-ONLY banner — NOT for legal review until placeholders resolved. Never block; recommend `profile-builder` / `feature-scoping` / `estimation` for high-stakes work.
 
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. SoW commercial language depends on engagement shape, so this matters. Three options:
-> 1. Run `profile-builder` first (recommended)
-> 2. Bootstrap inline — I'll ask 2 questions: (a) budget structure (fixed-fee / T&M / milestone-based), (b) regulatory constraints (GDPR / HIPAA / SOC2 / none) (fast)
-> 3. Proceed with generic fixed-fee + no-regulatory framing, tagged `[ASSUMED COMMERCIAL]` and DRAFT-ONLY"
->
-> Which?"
+## Step 2 — Fill the template
 
-Default to option 2. Never block.
+Fill `./template.md`. It owns the structure (parties, deliverables table, out-of-scope, timeline + milestones, pricing model, payment terms, change-requests, acceptance + revisions, warranties, IP + confidentiality, termination, client dependencies, assumptions, outsourcing-specific clauses, signatures). This skill's job is the *content*; the template is the shape.
 
-**Required-input artifacts:** Try to read these.
+**Fields that hide disputes — be precise here:**
 
-- `scope-doc.md` — deliverables and exclusions
-- `estimation.md` — pricing structure
-
-Recommended:
-- `proposal.md` — gives the language already shared with client; SoW should be consistent (don't introduce new scope here)
-- `risk-assumption-map.md` — informs warranty language
-
-**If `scope-doc.md` or `estimation.md` is missing**, tell the BA:
-> "Heads-up: SoW without scope or pricing is not a contract draft, it's a template. Three options:
-> 1. Run `feature-scoping` and/or `estimation` first (recommended — required for any client-routable SoW)
-> 2. Bootstrap inline — paste deliverable bullets and pricing structure (fast, draft-only)
-> 3. Proceed with `[TBD]` placeholders in those sections — output marked DRAFT-ONLY, NOT for legal review until placeholders resolved"
->
-> Which?"
-
-Default to option 2. Never block — but the DRAFT-ONLY banner is non-removable when option 3 is picked.
-
-## Step 2 — Section walkthrough
-
-### 2.1 Parties + engagement reference
-Agency legal name, client legal name, engagement title, master agreement reference if applicable.
-
-### 2.2 Deliverables
-Pulled from `scope-doc.md` "in" column. Each deliverable as:
-
-| # | Deliverable | Description | Format | Acceptance criteria |
-|---|---|---|---|---|
-
-**Acceptance criteria are the most important field.** Vague = disputes. "User can complete X workflow without errors" not "system works".
-
-### 2.3 Out of scope
-Verbatim from `scope-doc.md` "out" + "explicitly deferred". Critical — prevents post-signature scope creep.
-
-### 2.4 Timeline + milestones
-From estimation phases. Mark which milestones are payment triggers.
-
-### 2.5 Pricing structure
-Pick based on `discovery-context.md` section 3 Budget context:
-
-| Model | Use when |
-|---|---|
-| **Fixed fee** | Tight scope, low-risk delivery, repeat work |
-| **T&M with cap** | Moderate scope uncertainty |
-| **Pure T&M** | Staff aug, exploratory delivery, very uncertain scope |
-| **Phased / milestone-based** | Long engagement, gates between phases |
-
-Spell out: hourly/daily rates per discipline if T&M, fixed numbers if fixed-fee, milestone amounts if phased.
-
-### 2.6 Payment terms
-- Invoice frequency (monthly / per milestone / on completion)
-- Net days (Net 30 typical)
-- Late payment terms
-- Currency, exchange rate handling if cross-border
-- Tax handling
-
-### 2.7 Change-request process
-**Critical.** Without this, every "small addition" mid-build becomes an argument.
-
-- Who can request changes (named roles)
-- How requests are submitted (form, email, ticket)
-- Estimation turnaround (3-5 business days typical)
-- Sign-off authority
-- How changes affect price + timeline
-
-### 2.8 Acceptance + revision process
-- How client signs off on deliverables
-- Revision rounds included (typically 1-2)
-- Beyond included revisions = change request
-
-### 2.9 Warranties
-- What the agency warrants (e.g., 30-60 day bug fix window post-delivery)
-- What's NOT warranted (third-party issues, scope changes, environment issues)
-- Inputs for this come from `risk-assumption-map.md` `[agency]` rows — agency carries those, so warranty must be bounded.
-
-### 2.10 IP and confidentiality
-- Who owns what (typically: client owns deliverable IP; agency retains tools/methodologies)
-- Confidentiality term (mutual NDA reference if exists)
-- Use of work in agency portfolio (often: anonymized OK, named requires permission)
-
-### 2.11 Termination
-- For convenience (notice period both ways)
-- For cause (with cure period)
-- What happens to in-progress work + payment for it
-
-### 2.12 Dependencies on client
-From `scope-doc.md` outsourcing extras + risk-map `[client]` rows. State explicitly that delays on these may impact timeline + cost.
-
-### 2.13 Assumptions
-Verbatim from `estimation.md`. If any becomes false, SoW is voidable / must be amended.
+- **Acceptance criteria** (per deliverable). "User can complete X workflow without errors" not "system works". Vague = future dispute.
+- **Out of scope.** Verbatim from `scope-doc.md` "out" + "explicitly deferred". Critical — prevents post-signature scope creep.
+- **Pricing model.** Pick from `discovery-context.md` budget context: fixed-fee (tight scope, repeat work) / T&M with cap (moderate uncertainty) / pure T&M (staff aug, exploratory) / phased (long engagement with gates). Spell out: rates per discipline if T&M, fixed numbers if fixed-fee, milestone amounts if phased.
+- **Change-request process.** Without it, every "small addition" mid-build becomes an argument. Specify: who can request, how submitted, estimation turnaround (3-5 business days typical), sign-off authority, how changes affect price + timeline.
+- **Warranties.** What the agency warrants (e.g., 30-60 day bug-fix window post-delivery) AND what's NOT warranted (third-party issues, scope changes, environment). Bound from `risk-assumption-map.md` `[agency]` rows.
+- **Client dependencies.** From `scope-doc.md` outsourcing extras + risk-map `[client]` rows. State explicitly that delays may impact timeline + cost. Don't bury — top-section visible.
+- **Assumptions.** Verbatim from `estimation.md` "Assumptions that invalidate the estimate". If any becomes false, SoW is voidable / must be amended.
 
 ## Step 3 — Outsourcing-specific clauses (often missed)
 
-Add if relevant:
-
-- **Time-zone overlap requirement** — if discovery context shows distributed teams
+Add to template's section 14 if relevant:
+- **Time-zone overlap requirement** — if context shows distributed teams
 - **Subcontractor disclosure** — does the agency use subs? Client right to approve?
-- **Data handling** — GDPR / HIPAA / SOC2 compliance specifics if section 6 flagged any
+- **Data handling** — GDPR / HIPAA / SOC2 specifics if section 6 flagged any
 - **Communication cadence SLA** — response times, meeting cadence
-- **Tooling rights** — who provides Linear/Jira/Slack/Figma seats; ownership of artifacts in those tools
+- **Tooling rights** — who provides Linear/Jira/Slack/Figma seats; ownership of artifacts
 
 ## Step 4 — Output
 
@@ -142,7 +56,7 @@ Add if relevant:
 
 > **DRAFT — REQUIRES AGENCY LEGAL + CLIENT LEGAL REVIEW BEFORE EXECUTION.**
 
-Append to `_log.md`: `[sow-draft | <date>] pricing model: <model>; deliverables: <count>; acceptance criteria defined: <Y/N>; legal review: pending`.
+Append to `_log.md`: `[sow-draft | YYYY-MM-DD] pricing: <model>; deliverables: <count>; acceptance_defined: <Y/N>; legal_review: pending`.
 
 ## Anti-patterns
 

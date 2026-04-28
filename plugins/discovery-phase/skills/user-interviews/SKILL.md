@@ -1,12 +1,13 @@
 ---
 name: user-interviews
+pack: discovery-phase
 description: >-
-  Evidence group skill. Runs direct end-user interviews to saturation.
-  Warns (does not halt) if discovery-context says user_access is none or
-  proxy-only — recommends sme-workshops / support-data-analysis /
-  secondary-research instead, but allows override. Captures past
-  behavior, not hypotheticals. Produces one note file per participant +
-  saturation log.
+  [discovery-phase pack · evidence] Runs direct end-user interviews to
+  saturation. Warns (does not halt) if discovery-context says user_access
+  is none or proxy-only — recommends sme-workshops /
+  support-data-analysis / secondary-research instead, but allows
+  override. Captures past behavior, not hypotheticals. Produces one note
+  file per participant + saturation log.
 group: evidence
 produces: interview-notes/p<NN>-*.md, _saturation-log.md
 consumes: discovery-context.md, interview-guide.md (if exists)
@@ -15,37 +16,17 @@ origin: ECC
 
 # User Interviews
 
+> Part of the **discovery-phase** skill pack · `evidence` group · reads `discovery-context.md` (run `profile-builder` first if missing).
+
 Direct user interviews. Run only when `user_access` allows it.
 
-## Step 1 — Read discovery context (recommended, not required)
+## Step 1 — Read discovery context
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` (section **4. Access & Data**) and `./discovery/interview-guide.md` if it exists.
 
-**If present:** Pull section **4. Access & Data**.
+If `discovery-context.md` is missing, ask the BA inline: "end-user access — direct / client-mediated / proxy-only / none?" — tag access-related notes `[ASSUMED]`. If the interview guide is missing, recommend running `research-planning` first or bootstrap a 4–5 question generic guide inline. Never block; recommend `profile-builder` for high-stakes work.
 
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. Three options:
-> 1. Run `profile-builder` first (recommended)
-> 2. Bootstrap inline — confirm 1 thing: end-user access is direct / client-mediated / proxy-only / none?
-> 3. Proceed assuming direct access — I'll tag any access-related note as `[ASSUMED]`"
->
-> Which?"
-
-Default to option 2. Never block.
-
-**Access reality-check (warn + confirm, do not halt):**
-
-If access is `proxy-only` or `none`, tell the BA:
-> "⚠ Reality check: your context says `user_access: <value>`. Direct interviews typically aren't reachable in that case. Recommended alternatives: `sme-workshops`, `support-data-analysis`, `secondary-research`. Three choices:
-> 1. Switch to one of those skills (recommended)
-> 2. Proceed anyway — you have an override path (e.g. friendly contact, recruiting independently). I'll tag every note with `[NO-ACCESS-OVERRIDE]` and add a banner to `_saturation-log.md` explaining the deviation
-> 3. Update `discovery-context.md` first to reflect the new access reality, then re-run"
->
-> Which?"
-
-Never auto-halt. If the BA picks option 2, proceed and ensure the `[NO-ACCESS-OVERRIDE]` tag appears in every note file plus a banner at the top of `_saturation-log.md`: "⚠ Run with insufficient access — outputs are speculative."
-
-If guide exists at `./discovery/interview-guide.md`, use it. If not, recommend running `research-planning` first to build one (offer to bootstrap a 4–5 question generic guide inline as a fallback).
+**Access reality-check (warn + confirm, do not halt):** if access is `proxy-only` or `none`, warn that direct interviews typically aren't reachable. Recommend switching to `sme-workshops`, `support-data-analysis`, or `secondary-research`. If the BA proceeds anyway (override path — friendly contact, independent recruiting), tag every note with `[NO-ACCESS-OVERRIDE]` and add a banner to `_saturation-log.md`: "⚠ Run with insufficient access — outputs are speculative."
 
 ## Step 2 — Per-interview prep (15 min)
 
@@ -85,7 +66,7 @@ Three consecutive "new themes: none" = saturation. Tell the user.
 - `./discovery/interview-notes/p<NN>-<initials>.md` per participant
 - `./discovery/interview-notes/_saturation-log.md` running
 
-Append to `_log.md` after every interview: `[user-interviews | <date>] P<NN>: <one-line takeaway>`.
+Append to `_log.md` after every interview: `[user-interviews | YYYY-MM-DD] participant: P<NN>; takeaway: <one-line>`.
 
 ## Handoff
 

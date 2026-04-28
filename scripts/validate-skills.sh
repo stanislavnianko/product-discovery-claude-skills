@@ -28,11 +28,18 @@ check_skill() {
   fm="$(awk '/^---$/{n++; next} n==1 {print} n==2 {exit}' "$md")"
 
   # Required keys
-  for key in name description; do
+  for key in name pack description; do
     if ! grep -qE "^${key}:" <<<"$fm"; then
       echo "FAIL  $name: missing frontmatter key '$key'"; ((failures++)) || true
     fi
   done
+
+  # pack must be discovery-phase
+  local pack_val
+  pack_val="$(grep -E '^pack:' <<<"$fm" | sed -E 's/^pack:[[:space:]]*//' | tr -d '[:space:]')"
+  if [[ -n "$pack_val" && "$pack_val" != "discovery-phase" ]]; then
+    echo "FAIL  $name: pack must be 'discovery-phase' (got '$pack_val')"; ((failures++)) || true
+  fi
 
   # Non-foundation/conductor skills should declare group + produces
   if [[ "$name" != "profile-builder" && "$name" != "discovery-conductor" ]]; then
@@ -41,6 +48,11 @@ check_skill() {
         echo "WARN  $name: missing recommended key '$key'"; ((warnings++)) || true
       fi
     done
+  fi
+
+  # Body banner: first non-blank line after H1 should declare pack membership
+  if ! grep -qE '^> .*\*\*discovery-phase\*\*' "$md"; then
+    echo "WARN  $name: body banner ('> Part of the **discovery-phase** ...') not found"; ((warnings++)) || true
   fi
 
   # Description length guard (single-line assumption)

@@ -1,10 +1,11 @@
 ---
 name: stakeholder-mapping
+pack: discovery-phase
 description: >-
-  Discovery group skill. Maps client-side AND agency-side stakeholders
-  with their stakes, success metrics, concerns, decision rights, and
-  conflicts. Two-tier map. Surfaces deal-breakers in week 1, not week 4.
-  Produces stakeholder-map.md. Reads discovery-context.md.
+  [discovery-phase pack · discovery] Maps client-side AND agency-side
+  stakeholders with their stakes, success metrics, concerns, decision
+  rights, and conflicts. Two-tier map. Surfaces deal-breakers in week 1,
+  not week 4. Produces stakeholder-map.md. Reads discovery-context.md.
 group: discovery
 produces: stakeholder-map.md
 consumes: discovery-context.md, problem-canvas.md (optional)
@@ -13,25 +14,15 @@ origin: ECC
 
 # Stakeholder Mapping
 
+> Part of the **discovery-phase** skill pack · `discovery` group · reads `discovery-context.md` (run `profile-builder` first if missing).
+
 Two-tier map for outsourcing reality: client stakeholders + agency stakeholders. The agency tier is the one most often forgotten, and it's where engagement-killers (sales conflict, delivery capacity, partner dependencies) live.
 
-## Step 1 — Read discovery context (recommended, not required)
+## Step 1 — Read discovery context
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` (sections **1. Client → Decision-makers**, **3. Engagement → Runner role**) and `problem-canvas.md` if it exists (anchors stakeholders against the actual problem).
 
-**If present:** Pull sections **1. Client → Decision-makers**, **3. Engagement → Runner role**.
-
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. Best results come from running `profile-builder` first. Three options:
-> 1. Run `profile-builder` now and come back (recommended)
-> 2. Bootstrap inline — I'll ask 2 quick questions: (a) name 1–3 client decision-makers + role, (b) what's the engagement mode (pre-sale / paid discovery / delivery / staff aug)? (fast, lower fidelity)
-> 3. Proceed without it — I'll tag every stakeholder field that lacks grounding as `[ASSUMED]`"
->
-> Which?"
-
-Default to option 2 if the BA says "just go". Never block.
-
-Read `problem-canvas.md` if it exists, to anchor stakeholders against the actual problem; if absent, proceed (this skill works standalone).
+If `discovery-context.md` is missing, ask the BA inline: "(a) name 1–3 client decision-makers + role; (b) engagement mode (pre-sale / paid discovery / delivery / staff aug)?" — tag any unverified stakeholder field as `[ASSUMED]`. Never block; recommend `profile-builder` for high-stakes work.
 
 ## Step 2 — List client-side stakeholders
 
@@ -101,7 +92,7 @@ Pick one based on engagement timeline:
 
 `./discovery/stakeholder-map.md` per `./template.md`.
 
-Append to `_log.md`: `[stakeholder-mapping | <date>] client tier: <N>; agency tier: <N>; conflicts logged: <N>; cadence: <cadence>`.
+Append to `_log.md`: `[stakeholder-mapping | YYYY-MM-DD] client_tier: <N>; agency_tier: <N>; conflicts: <N>; cadence: <cadence>`.
 
 ## Anti-patterns
 

@@ -1,20 +1,23 @@
 ---
 name: profile-builder
+pack: discovery-phase
 description: >-
-  Foundation skill for the discovery-phase pack. Interviews the BA about
-  the client, the product/initiative, the engagement model, access
-  constraints, and expected deliverable. Writes a single
-  discovery-context.md to the project root. Every other skill in this
-  pack recommends reading it; running it first gives the best results,
-  but other skills will offer inline bootstrap if you skip ahead.
-  TRIGGER when the user says "build my discovery profile", "set up
-  discovery context", "start a new client engagement", or activates any
-  other discovery-phase skill before this one has run.
+  [discovery-phase pack · foundation] Interviews the BA about the client,
+  the product/initiative, the engagement model, access constraints, and
+  expected deliverable. Writes a single discovery-context.md to the
+  project root. Every other skill in this pack recommends reading it;
+  running it first gives the best results, but other skills will offer
+  inline bootstrap if you skip ahead. TRIGGER when the user says "build
+  my discovery profile", "set up discovery context", "start a new client
+  engagement", or activates any other discovery-phase skill before this
+  one has run.
 group: foundation
 origin: ECC
 ---
 
 # Profile Builder
+
+> **Foundation skill** of the **discovery-phase** skill pack · `foundation` group · writes `discovery-context.md`, the file every other skill in the pack reads.
 
 Produces `discovery-context.md` — the single source of truth that every other skill in this pack reads. Without it, other skills will warn and offer to bootstrap inline (a 2–3 question mini-interview held in conversation, not written to disk). Running this skill first gives the best, most consistent results.
 
@@ -109,14 +112,7 @@ Then state: **"Discovery context written. Other skills in this pack will now run
 
 ## What downstream skills consume
 
-Every other skill in the pack starts with the soft-gate pattern:
-```
-Read `discovery-context.md` from project root. If missing, offer the BA
-three options: (1) run `profile-builder` first, (2) bootstrap inline via
-2–3 questions for this run only, or (3) proceed and tag every assumption
-as `[ASSUMED]` in the output. Default to option 2 if the BA says "just go".
-Never block.
-```
+Every other skill in the pack reads `discovery-context.md` and runs the soft-gate pattern: if the file is missing, ask 1–3 skill-specific bootstrap questions inline, tag any unverified output field as `[ASSUMED]`, and never block. See each skill's Step 1 for its specific bootstrap questions.
 
 Specifically:
 - **problem-framing** uses Client + Initiative + prior-solution sections
@@ -124,3 +120,19 @@ Specifically:
 - **research-planning, user-interviews, sme-workshops, secondary-research, support-data-analysis** all branch on Access & Data
 - **estimation, proposal, sow-draft** consume Engagement + Deliverable sections
 - **All deliverable skills** read Constraints (NDA, regulatory) before writing
+
+## `_log.md` — pack-wide log schema
+
+Every downstream skill appends one line to `./discovery/_log.md` after writing its artifact, using a single canonical schema:
+
+```
+[<skill-name> | YYYY-MM-DD] key1: value1; key2: value2; key3: value3
+```
+
+Rules:
+- Brackets contain the skill name and the run date (ISO format, no time).
+- Body is a flat list of `key: value` pairs separated by `;`.
+- Keys are skill-specific but should be short, lowercase, and stable across runs.
+- One line per run. Multiple runs of the same skill produce multiple lines (newest at bottom).
+
+This schema lets the conductor read `_log.md` to see what's been run, and lets deliverable skills (`proposal`, `sow-draft`, `discovery-handoff`, `go-nogo-memo`) recover the evidence chain without re-reading every artifact.

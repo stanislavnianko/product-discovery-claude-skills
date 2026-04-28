@@ -1,11 +1,12 @@
 ---
 name: mvp-definition
+pack: discovery-phase
 description: >-
-  Scoping group skill. Defines a Minimum Viable Product as a learning
-  vehicle, not a feature-stripped product. Distinguishes MVP scope from
-  PoC scope and from full-product scope. Often run after feature-scoping
-  when the client conflates "MVP" with "first release". Produces
-  mvp-definition.md.
+  [discovery-phase pack · scoping] Defines a Minimum Viable Product as a
+  learning vehicle, not a feature-stripped product. Distinguishes MVP
+  scope from PoC scope and from full-product scope. Often run after
+  feature-scoping when the client conflates "MVP" with "first release".
+  Produces mvp-definition.md.
 group: scoping
 produces: mvp-definition.md
 consumes: discovery-context.md, scope-doc.md (optional), risk-assumption-map.md
@@ -13,6 +14,8 @@ origin: ECC
 ---
 
 # MVP Definition
+
+> Part of the **discovery-phase** skill pack · `scoping` group · reads `discovery-context.md` (run `profile-builder` first if missing).
 
 A clarifier skill — runs when "what is the MVP, exactly?" comes up. Distinguishes three levels: PoC (proves a tech assumption), MVP (proves a market assumption), v1 (delivers value at scale). Outputs an explicit comparison so the client and agency align before scope hardens.
 
@@ -23,35 +26,11 @@ A clarifier skill — runs when "what is the MVP, exactly?" comes up. Distinguis
 - After `feature-scoping` to validate the scope is actually MVP-shaped
 - During pre-sale conversations to align expectations
 
-## Step 1 — Read context (recommended, not required)
+## Step 1 — Read context
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` and `risk-assumption-map.md` (top-3 assumptions are what the MVP must validate). Optionally read `scope-doc.md` (reinforces MVP framing).
 
-**If present:** Pull whatever's needed downstream.
-
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. Three options:
-> 1. Run `profile-builder` first (recommended)
-> 2. Bootstrap inline — I'll ask 1 question: client stage (pre-launch / early traction / scaling / mature) so I can pick the right MVP framing
-> 3. Proceed with generic MVP framing, tagged `[ASSUMED]`"
->
-> Which?"
-
-Default to option 2. Never block.
-
-Try to read `risk-assumption-map.md` to pull the top-3 assumptions to retire.
-
-**If missing:** Tell the BA:
-> "Heads-up: `risk-assumption-map.md` is missing. The top-3 assumptions are what the MVP must validate, so this matters. Three options:
-> 1. Run `risk-assumption-mapping` first (recommended)
-> 2. Bootstrap inline — name 1–3 assumptions to retire in one sentence each (fast)
-> 3. Proceed without a risk anchor — MVP scope will be feature-driven rather than learning-driven, tagged `[NO-RISK-FRAME]`"
->
-> Which?"
-
-Default to option 2. Never block.
-
-Read `scope-doc.md` if it exists — the scope-doc and MVP-definition reinforce each other. If absent, this skill still works standalone.
+If `discovery-context.md` is missing, ask the BA inline: "client stage — pre-launch / early traction / scaling / mature?" — tag the output `[ASSUMED]`. If `risk-assumption-map.md` is missing, ask: "name 1–3 assumptions to retire in one sentence each" — or proceed tagged `[NO-RISK-FRAME]` (MVP becomes feature-driven, not learning-driven). Never block; recommend `profile-builder` / `risk-assumption-mapping` for high-stakes work.
 
 ## Step 2 — Three-level table
 
@@ -107,7 +86,7 @@ If the MVP **succeeds**, what's the path to v1?
 
 `./discovery/mvp-definition.md` per `./template.md`.
 
-Append to `_log.md`: `[mvp-definition | <date>] applicable level: <PoC/MVP/v1>; success threshold: <leading + lagging>; tear-down: <yes/no>`.
+Append to `_log.md`: `[mvp-definition | YYYY-MM-DD] level: <PoC/MVP/v1>; threshold: <leading+lagging>; teardown: <yes/no>`.
 
 ## Anti-patterns
 

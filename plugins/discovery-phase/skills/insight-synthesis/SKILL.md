@@ -1,10 +1,11 @@
 ---
 name: insight-synthesis
+pack: discovery-phase
 description: >-
-  Synthesis group skill. Consolidates whatever evidence was actually
-  gathered (interview notes, SME workshops, support data, secondary
-  research, competitive scan) into ranked themes and top-3 pain points
-  with confidence-weighted scoring. Produces insight-matrix.md and
+  [discovery-phase pack · synthesis] Consolidates whatever evidence was
+  actually gathered (interview notes, SME workshops, support data,
+  secondary research, competitive scan) into ranked themes and top-3 pain
+  points with confidence-weighted scoring. Produces insight-matrix.md and
   themes.md. Reads discovery-context.md.
 group: synthesis
 produces: insight-matrix.md, themes.md
@@ -14,23 +15,13 @@ origin: ECC
 
 # Insight Synthesis
 
+> Part of the **discovery-phase** skill pack · `synthesis` group · reads `discovery-context.md` (run `profile-builder` first if missing).
+
 Turns whatever evidence the BA managed to gather into structured insights — weighted by source quality so the team doesn't treat one SME's hunch as equal to five user interviews.
 
-## Step 1 — Read discovery context (recommended, not required)
+## Step 1 — Read discovery context
 
-Try to read `discovery-context.md`.
-
-**If present:** Pull **4. Access & Data** to know what evidence to expect.
-
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. Synthesis still works — I'll just synthesize from whatever evidence files I find. Three options:
-> 1. Run `profile-builder` first (recommended for proper source-weighting)
-> 2. Bootstrap inline — I'll ask 1 question: which evidence types should I expect (interviews / SMEs / tickets / secondary / competitive / mix), so I can weight sources properly (fast)
-> 3. Proceed and weight all sources equally, tagged `[NO-WEIGHTING-CONTEXT]`"
->
-> Which?"
-
-Default to option 2. Never block.
+Read `discovery-context.md` (section **4. Access & Data**) to know what evidence to expect. If missing, ask the BA inline: "which evidence types should I expect — interviews / SMEs / tickets / secondary / competitive / mix?" — or weight all sources equally and tag the output `[NO-WEIGHTING-CONTEXT]`. Never block; recommend `profile-builder` for high-stakes work.
 
 Then scan `./discovery/` for actually-present artifacts:
 - `interview-notes/*.md` (direct evidence — highest weight)
@@ -100,7 +91,7 @@ This is critical for outsourcing — the BA must be able to say to the client "w
 - `./discovery/insight-matrix.md` per `./template.md` (scored table + top-3 detail + surprises + dropped)
 - `./discovery/themes.md` (1-page narrative summary, for stakeholder readout — written for client, not internal team)
 
-Append to `_log.md`: `[insight-synthesis | <date>] sources: <list>; themes: <N>; top-3: <one-liners>; confidence: <high/med/low>; surprises: <count>`.
+Append to `_log.md`: `[insight-synthesis | YYYY-MM-DD] sources: <list>; themes: <N>; top3: <one-liners>; confidence: <high/med/low>; surprises: <count>`.
 
 ## Anti-patterns
 

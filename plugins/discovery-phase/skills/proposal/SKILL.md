@@ -1,12 +1,12 @@
 ---
 name: proposal
+pack: discovery-phase
 description: >-
-  Deliverables group skill. Generates a client-facing proposal document
-  consolidating problem understanding, recommended approach, scope,
-  assumptions, dependencies, team, timeline, and headline pricing
-  guidance. Designed for pre-sale or paid-discovery conclusion.
-  Produces proposal.md. Reads discovery-context.md and most upstream
-  artifacts.
+  [discovery-phase pack · deliverables] Generates a client-facing proposal
+  document consolidating problem understanding, recommended approach,
+  scope, assumptions, dependencies, team, timeline, and headline pricing
+  guidance. Designed for pre-sale or paid-discovery conclusion. Produces
+  proposal.md. Reads discovery-context.md and most upstream artifacts.
 group: deliverables
 produces: proposal.md
 consumes: discovery-context.md, problem-canvas.md, scope-doc.md, estimation.md, risk-assumption-map.md, opportunity-tree.md (optional)
@@ -15,43 +15,21 @@ origin: ECC
 
 # Proposal
 
+> Part of the **discovery-phase** skill pack · `deliverables` group · reads `discovery-context.md` (run `profile-builder` first if missing).
+
 Agency-to-client proposal document. The output the client reads, signs (or doesn't), and budgets against.
 
-## Step 1 — Read context + prerequisites (recommended, not required)
+## Step 1 — Read context + prerequisites
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` (sections **3. Engagement → Mode** — if mode is staff aug or internal, suggest `discovery-handoff` instead, but allow override; **5. Expected deliverable**).
 
-**If present:** Pull **3. Engagement → Mode** (if mode is staff aug or internal, suggest `discovery-handoff` instead — but allow override) and **5. Expected deliverable**.
-
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. Three options:
-> 1. Run `profile-builder` first (recommended)
-> 2. Bootstrap inline — I'll ask 2 questions: (a) engagement mode (pre-sale / paid discovery / other), (b) client name + sector (fast)
-> 3. Proceed with generic engagement framing, tagged `[ASSUMED]`"
->
-> Which?"
-
-Default to option 2. Never block.
-
-**Prerequisite artifacts:** Try to read these. They're the proposal's substance.
-
+**Prerequisite artifacts** — the proposal's substance:
 - `scope-doc.md` — scope language
 - `estimation.md` — effort + assumption list
 - `risk-assumption-map.md` — risk register
+- Recommended: `problem-canvas.md`, `opportunity-tree.md`
 
-Strongly recommended:
-- `problem-canvas.md` — anchors problem statement
-- `opportunity-tree.md` — supports recommended-approach narrative
-
-**If any required artifact is missing**, tell the BA:
-> "Heads-up: missing prerequisite artifacts: `<list>`. A proposal without scope or estimation is unusable for client signature. Three options:
-> 1. Run the prerequisite skills first (`feature-scoping`, `estimation`, `risk-assumption-mapping`) — recommended for any client-facing proposal
-> 2. Bootstrap inline — for each missing artifact, give me 3–5 bullets I can use as a stand-in (fast, suitable for internal draft only)
-> 3. Proceed with `[ASSUMED <artifact>]` placeholder sections — output marked DRAFT-ONLY at the top, NOT for client send"
->
-> Which?"
-
-Default to option 2 if 1–2 artifacts missing. If 3+ missing, recommend option 1 explicitly. Never block — but the auto-applied DRAFT-ONLY banner is non-removable when option 3 is picked.
+If `discovery-context.md` is missing, ask the BA inline: "(a) engagement mode (pre-sale / paid discovery / other); (b) client name + sector?" — tag `[ASSUMED]`. If 1–2 prerequisite artifacts are missing, ask for 3–5 stand-in bullets per artifact. If 3+ are missing, strongly recommend running the prerequisite skills first; otherwise proceed with `[ASSUMED <artifact>]` placeholders and a non-removable DRAFT-ONLY banner at the top of `proposal.md` (NOT for client send). Never block.
 
 ## Step 2 — Pick proposal style
 
@@ -101,7 +79,7 @@ If `opportunity-tree.md` was Validate-mode and chose against client's pre-propos
 
 `./discovery/proposal.md` per `./template.md`.
 
-Append to `_log.md`: `[proposal | <date>] style: <executive/detailed/pitch>; total range: <X-Y>; sent to: <client contact>`.
+Append to `_log.md`: `[proposal | YYYY-MM-DD] style: <executive/detailed/pitch>; total: <X-Y>; sent_to: <client contact>`.
 
 ## Anti-patterns
 

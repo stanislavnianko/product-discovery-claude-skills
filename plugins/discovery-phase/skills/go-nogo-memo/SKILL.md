@@ -1,11 +1,12 @@
 ---
 name: go-nogo-memo
+pack: discovery-phase
 description: >-
-  Deliverables group skill. Produces a single GO / PIVOT / KILL memo
-  consolidating all evidence into a one-page decision document. The only
-  artifact most senior stakeholders read. Adapted for outsourcing —
-  decision-owner is typically the client, agency provides recommendation
-  with evidence chain.
+  [discovery-phase pack · deliverables] Produces a single GO / PIVOT /
+  KILL memo consolidating all evidence into a one-page decision document.
+  The only artifact most senior stakeholders read. Adapted for
+  outsourcing — decision-owner is typically the client, agency provides
+  recommendation with evidence chain.
 group: deliverables
 produces: go-no-go-memo.md
 consumes: discovery-context.md, all available upstream artifacts
@@ -13,6 +14,8 @@ origin: ECC
 ---
 
 # Go / No-Go Memo
+
+> Part of the **discovery-phase** skill pack · `deliverables` group · reads `discovery-context.md` (run `profile-builder` first if missing).
 
 The terminal decision document. Everything before this fed into it; everything after follows from it. In outsourcing, the **agency recommends**, the **client decides** — the memo must support both perspectives.
 
@@ -24,23 +27,11 @@ The terminal decision document. Everything before this fed into it; everything a
 
 Differs from `proposal`: proposal is commercial (here's what we'd do, please sign); memo is decisional (here's what we believe, please decide). They can co-exist.
 
-## Step 1 — Read context + scan evidence (recommended, not required)
+## Step 1 — Read context + scan evidence
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` (section **5. Expected deliverable**). Then scan `./discovery/` for available artifacts — even partial discovery can produce a memo, but flag the gaps explicitly in the memo's "Evidence" section.
 
-**If present:** Pull **5. Expected deliverable**.
-
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. The memo can still be written from whatever evidence is on disk. Three options:
-> 1. Run `profile-builder` first (recommended)
-> 2. Bootstrap inline — I'll ask 1 question: who's the decision-owner (client / agency / both) and what decision are we framing (proceed / pivot / kill)?
-> 3. Proceed and infer the framing from available artifacts, tagged `[ASSUMED FRAMING]`"
->
-> Which?"
-
-Default to option 2. Never block.
-
-Scan `./discovery/` for available artifacts. Even partial discovery can produce a memo, but flag the gaps explicitly in the memo's "Evidence basis" section.
+If `discovery-context.md` is missing, ask the BA inline: "who's the decision-owner (client / agency / both) and what decision are we framing (proceed / pivot / kill)?" — tag the output `[ASSUMED FRAMING]`. Never block; recommend `profile-builder` for high-stakes work.
 
 ## Step 2 — Force the decision first
 
@@ -48,104 +39,38 @@ Before writing anything, ask the BA:
 
 > "Based on what we have, what's the recommendation: GO / PIVOT / KILL? One word. We'll justify on paper next."
 
-If they hesitate or equivocate, probe:
-
+If they hesitate, probe:
 - "What's the one finding that would flip this to the opposite answer?"
 - "If you had to bet 10% of the agency's quarterly capacity (or your own time) on this, would you?"
 - "Imagine this memo arrived from another team. Would you approve their recommendation?"
 
 The memo serves the recommendation. No defensive prose.
 
-## Step 3 — Outsourcing context: clarify decision split
+## Step 3 — Clarify the decision split (outsourcing)
 
 Two roles must be explicit:
-
 - **Recommendation owner** — the agency BA / lead. Owns the recommendation in the memo.
 - **Decision owner** — typically the client (per `discovery-context.md` engagement). The memo gives them what they need to decide.
 
-State both at top of memo. "We (agency) recommend X. Decision rests with `<named client decision-maker>`."
+State both at the top of the memo: *"We (agency) recommend X. Decision rests with `<named client decision-maker>`."*
 
-## Step 4 — Decision (line 1)
+## Step 4 — Fill the template
 
-The first line of the memo: **"Recommendation: GO / PIVOT / KILL — `<one sentence why>`."**
+Fill `./template.md`. It owns the structure (recommendation line 1, TL;DR, rationale, evidence chain, key findings, risks-remaining, decision-specific GO/PIVOT/KILL section, signatures). This skill's job is the *content* — the template is the shape.
 
-Not in paragraph 3. Not buried in summary. Line 1.
+Key rules while filling:
+- **Line 1** is the recommendation. Not buried, not in paragraph 3.
+- **Evidence chain** links every artifact in `./discovery/`. A reader who disagrees can audit in 20 minutes. Mark missing artifacts explicitly (e.g., `~~Tech Spike Report~~ — not run`).
+- **Key findings** = one-sentence claim + one quote / data point each. Quotable in future planning docs.
+- **Risks-remain** comes from `risk-assumption-map.md` rows NOT retired during discovery, with owner per row. Distinguish client-owned (post-decision) vs agency-owned (if engagement converts).
+- **Decision-specific section** — fill ONE (GO / PIVOT / KILL), delete the others.
+- **Client decision signature** — leave blank until the client decides.
 
-## Step 5 — TL;DR (3 bullets)
+## Step 5 — Output + index update
 
-For phone-readability:
+`./discovery/go-no-go-memo.md` per `./template.md`. Update `DISCOVERY.md` (or `_log.md`) index entry to: *"Cycle complete — recommendation: `<X>`; decision: pending/`<Y>`"*.
 
-- 
-- 
-- 
-
-## Step 6 — Recommendation rationale (2 paragraphs max)
-
-What should happen Monday morning. If GO: who, scope, ship window, success metric. If PIVOT: new hypothesis + what carries over. If KILL: one-sentence reason + trigger for reconsidering.
-
-## Step 7 — Evidence chain
-
-Link every artifact in `./discovery/`. A reader who disagrees with the recommendation can audit the chain in 20 minutes.
-
-```
-- [Discovery Context](./discovery-context.md)
-- [Problem Canvas](./problem-canvas.md)
-- [Insight Matrix](./insight-matrix.md)
-- [Risk & Assumption Map](./risk-assumption-map.md)
-- [Scope Doc](./scope-doc.md)
-- [Tech Spike Report](./tech-spike-report.md) (if applicable)
-- [Prototype Plan](./poc-plan.md) (if applicable)
-- ...
-```
-
-## Step 8 — Key findings (3-5)
-
-Each finding = one-sentence claim + one quote / data point. Quotable in future planning docs.
-
-## Step 9 — Risks that remain
-
-From `risk-assumption-map.md` rows NOT retired during discovery. With owner per row.
-
-In outsourcing, distinguish:
-- Risks the **client** owns post-decision
-- Risks the **agency** owns if engagement converts
-
-## Step 10 — Decision-specific section
-
-Fill ONE; delete the others.
-
-### If GO
-- Proposed scope: link to `scope-doc.md`
-- Proposed owner: 
-- Proposed timeline: 
-- First next step (this week): 
-- Success metric + when measured: 
-- Commercial path: link to `proposal.md` / `sow-draft.md` if applicable
-
-### If PIVOT
-- New hypothesis: 
-- What changed our mind: 
-- What artifacts carry over (interviews still valid? scope obsolete?): 
-- Recommended next-cycle scope: 
-- Estimated effort to re-discover: 
-
-### If KILL
-- One-sentence reason: 
-- What would need to change for this to be worth revisiting: 
-- Where this memo should be archived (so we don't re-ask in 6 months): 
-- Resources released back to agency / client capacity: 
-
-## Step 11 — Signatures
-
-- Recommendation by (agency): name, role, date
-- Decision by (client): name, role, date — **left blank until the client decides**
-- Reviewers: 
-
-## Output
-
-`./discovery/go-no-go-memo.md` per `./template.md`. Update `DISCOVERY.md` index to "Cycle complete — recommendation: `<X>`; decision: pending/`<Y>`".
-
-Append to `_log.md`: `[go-nogo-memo | <date>] recommendation: <GO/PIVOT/KILL>; decision-owner: <client/agency>; commercial path: <proposal/sow/handoff/none>`.
+Append to `_log.md`: `[go-nogo-memo | YYYY-MM-DD] recommendation: <GO/PIVOT/KILL>; decision_owner: <client/agency>; commercial_path: <proposal/sow/handoff/none>`.
 
 ## Anti-patterns
 

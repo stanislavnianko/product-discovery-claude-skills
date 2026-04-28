@@ -1,11 +1,12 @@
 ---
 name: research-planning
+pack: discovery-phase
 description: >-
-  Discovery group skill. Designs the evidence-gathering plan based on
-  what access is actually available. Branches into direct interviews,
-  SME workshops, secondary research, support-data analysis, or a mix.
-  Produces research-plan.md and (if applicable) interview-guide.md.
-  Reads discovery-context.md.
+  [discovery-phase pack · discovery] Designs the evidence-gathering plan
+  based on what access is actually available. Branches into direct
+  interviews, SME workshops, secondary research, support-data analysis,
+  or a mix. Produces research-plan.md and (if applicable)
+  interview-guide.md. Reads discovery-context.md.
 group: discovery
 produces: research-plan.md, interview-guide.md (conditional)
 consumes: discovery-context.md, problem-canvas.md
@@ -14,25 +15,15 @@ origin: ECC
 
 # Research Planning
 
+> Part of the **discovery-phase** skill pack · `discovery` group · reads `discovery-context.md` (run `profile-builder` first if missing).
+
 The skill that decides **how** the BA will learn — informed by access reality, not aspiration. In outsourcing, this almost always means a mix of methods, not pure interviews.
 
-## Step 1 — Read discovery context (recommended, not required)
+## Step 1 — Read discovery context
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` (section **4. Access & Data** — drives the entire plan) and `problem-canvas.md` (anchors research questions to a hypothesis).
 
-**If present:** Pull section **4. Access & Data**. This drives the entire plan.
-
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. Access level drives the entire research plan, so this matters more here than elsewhere. Three options:
-> 1. Run `profile-builder` now (recommended)
-> 2. Bootstrap inline — I'll ask 2 questions: (a) end-user access (direct / client-mediated / proxy-only / none), (b) which proxy data sources are available (SMEs / support tickets / analytics / none) (fast)
-> 3. Proceed and recommend a generic mixed-methods plan, tagged `[ASSUMED ACCESS]`"
->
-> Which?"
-
-Default to option 2. Never block.
-
-Read `problem-canvas.md`. If absent, recommend running `problem-framing` first — research without a hypothesis is a fishing expedition. The BA can override and proceed; in that case tag the plan's research questions as `[NO-HYPOTHESIS]` so reviewers see the limitation.
+If `discovery-context.md` is missing, ask the BA inline: "(a) end-user access (direct / client-mediated / proxy-only / none); (b) which proxy data sources are available (SMEs / support tickets / analytics / none)?" — tag the output `[ASSUMED ACCESS]`. If `problem-canvas.md` is missing, recommend running `problem-framing` first; if BA overrides, tag research questions `[NO-HYPOTHESIS]`. Never block; recommend `profile-builder` for high-stakes work.
 
 ## Step 2 — Match access level → method mix
 
@@ -89,7 +80,7 @@ Pre-commit: "We'll know the research worked if we can update the problem-canvas 
 - `./discovery/research-plan.md` per `./template.md`
 - `./discovery/interview-guide.md` IF interviews are in the mix (use the dedicated `user-interviews` template)
 
-Append to `_log.md`: `[research-planning | <date>] mix: <methods>; target sessions/sources: <count>; window: <dates>`.
+Append to `_log.md`: `[research-planning | YYYY-MM-DD] mix: <methods>; target_sessions: <count>; window: <dates>`.
 
 ## Anti-patterns
 

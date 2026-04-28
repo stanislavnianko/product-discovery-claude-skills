@@ -1,11 +1,12 @@
 ---
 name: opportunity-mapping
+pack: discovery-phase
 description: >-
-  Synthesis group skill. Builds a Teresa Torres-style
+  [discovery-phase pack · synthesis] Builds a Teresa Torres-style
   opportunity-solution tree from the top-3 pain points. If the client
   pre-specified a solution, this skill validates that solution against
-  alternatives rather than generating cold. Produces opportunity-tree.md.
-  Reads discovery-context.md and insight-matrix.md.
+  alternatives rather than generating cold. Produces
+  opportunity-tree.md. Reads discovery-context.md and insight-matrix.md.
 group: synthesis
 produces: opportunity-tree.md
 consumes: discovery-context.md, insight-matrix.md
@@ -14,37 +15,15 @@ origin: ECC
 
 # Opportunity Mapping
 
+> Part of the **discovery-phase** skill pack · `synthesis` group · reads `discovery-context.md` (run `profile-builder` first if missing).
+
 Turns the top pain points into opportunities and forces multiple candidate solutions before the team locks in. Two modes depending on whether the client already proposed a solution.
 
-## Step 1 — Read discovery context + insights (recommended, not required)
+## Step 1 — Read discovery context + insights
 
-Try to read `discovery-context.md`.
+Read `discovery-context.md` (section **2. Product / Initiative → Solution already proposed by client** — drives mode selection) and `insight-matrix.md` (anchors the tree against ranked insights).
 
-**If present:** Pull **2. Product / Initiative → Solution already proposed by client**. This drives mode selection.
-
-**If missing:** Tell the BA:
-> "Heads-up: `discovery-context.md` is missing. Three options:
-> 1. Run `profile-builder` first (recommended)
-> 2. Bootstrap inline — I'll ask 1 question: did the client propose a specific solution, or are we generating cold? (this picks Generate-mode vs Validate-mode)
-> 3. Proceed in Generate-mode and tag the tree as `[ASSUMED]`"
->
-> Which?"
-
-Default to option 2. Never block.
-
-Try to read `insight-matrix.md`.
-
-**If present:** Anchor the tree against the ranked insights.
-
-**If missing:** Tell the BA:
-> "Heads-up: `insight-matrix.md` is missing. Without ranked insights the tree won't have an evidence anchor. Three options:
-> 1. Run `insight-synthesis` first (recommended for high-stakes work)
-> 2. Bootstrap inline — name the top 1–3 pains in one sentence each (fast, lower fidelity — these become the tree's roots, but with no source-weighting)
-> 3. Proceed without anchored pains — I'll work from your hypothesis or the client's proposed solution, every leaf tagged `[NO-EVIDENCE-ANCHOR]`"
->
-> Which?"
-
-Default to option 2. Never block.
+If `discovery-context.md` is missing, ask the BA inline: "did the client propose a specific solution, or are we generating cold?" — picks Generate-mode vs Validate-mode; tag output `[ASSUMED]` on uncertainty. If `insight-matrix.md` is missing, ask: "name the top 1–3 pains in one sentence each" — or proceed with every leaf tagged `[NO-EVIDENCE-ANCHOR]`. Never block; recommend `profile-builder` / `insight-synthesis` for high-stakes work.
 
 ## Step 2 — Pick mode
 
@@ -115,7 +94,7 @@ Experiments are days, not weeks. If an experiment needs >1 week, it's a `feasibi
 
 `./discovery/opportunity-tree.md` per `./template.md`.
 
-Append to `_log.md`: `[opportunity-mapping | <date>] mode: <generate/validate>; opp attacked: <one-line>; chosen solution: <one-line>; experiments: <count>`.
+Append to `_log.md`: `[opportunity-mapping | YYYY-MM-DD] mode: <generate/validate>; opp: <one-line>; chosen: <one-line>; experiments: <count>`.
 
 ## Anti-patterns
 
