@@ -1,6 +1,6 @@
 {
   "name": "discovery-phase",
-  "description": "Discovery → PoC skill pack. Orchestrates 12 phase sub-skills to drive a team from a rough idea to a validated prototype or go/no-go decision. Tech-PoC track is skippable when feasibility is already known.",
+  "description": "Outsourcing-first product discovery skill pack. 25 skills across 7 groups (foundation, discovery, evidence, synthesis, scoping, validation, deliverables) — drives a BA / agency / consultant from rough brief to validated proposal, prototype, or go/no-go decision. Skills run independently or via the optional discovery-conductor.",
   "author": {
     "name": "Stanislav Nianko",
     "email": "promoinua@gmail.com"
