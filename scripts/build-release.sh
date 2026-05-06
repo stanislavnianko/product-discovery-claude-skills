@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Builds release artifacts for claude.ai / Claude Desktop install:
-#   dist/skills/<skill>.zip       — one zip per skill (22 total)
+#   dist/skills/<skill>.zip       — one zip per skill (25 total)
 #   dist/discovery-phase-all.zip  — bundle of all per-skill zips
 #
 # Each per-skill zip contains a single top-level folder with SKILL.md inside,
